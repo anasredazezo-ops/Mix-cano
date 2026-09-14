@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مطعم ميكسكانو | Mix Cano - المنيو الكامل والطلب المباشر</title>
+  <!-- Google Fonts: Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #D32F2F;
+      --primary-dark: #B71C1C;
+      --secondary: #FFB300;
+      --dark: #1A1A1A;
+      --light: #F8F9FA;
+      --surface: #FFFFFF;
+      --text-muted: #6B7280;
+      --border: #E5E7EB;
+      --success: #16A34A;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: var(--light);
+      color: var(--dark);
+      padding-bottom: 95px;
+    }
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 14px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 15px rgba(211, 47, 47, 0.25);
+    }
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-area h1 {
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo-area p {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+    .contact-btn {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+    .contact-btn:hover { background: white; color: var(--primary); }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 12px auto;
+      padding: 0 12px;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80') center/cover;
+      height: 130px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .hero-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      width: 100%;
+      padding: 12px 14px;
+      color: white;
+    }
+    .hero-overlay h2 { font-size: 17px; font-weight: 900; }
+    .hero-overlay p { font-size: 11px; color: var(--secondary); font-weight: bold; }
+
+    /* Search Bar */
+    .search-box {
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px 38px 10px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .search-box input:focus { border-color: var(--primary); }
+    .search-box i {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    /* Categories Tabs */
+    .categories-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .categories-tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: all 0.2s;
+    }
+    .tab-btn .badge-count {
+      font-size: 10px;
+      background: #F3F4F6;
+      color: #4B5563;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 800;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+    }
+    .tab-btn.active .badge-count {
+      background: rgba(255,255,255,0.25);
+      color: white;
+    }
+
+    /* Section Title */
+    .section-title {
+      font-size: 15px;
+      font-weight: 900;
+      margin: 12px 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--dark);
+    }
+    .section-title span.count {
+      font-size: 11px;
+      color: var(--primary);
+      background: #FEE2E2;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .product-card {
+      background: var(--surface);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .product-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 4px;
+    }
+    .product-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .badge-tag {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #FEF3C7;
+      color: #92400E;
+      white-space: nowrap;
+    }
+    .product-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    /* Size selector pills inside card */
+    .card-sizes-selector {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      background: #F9FAFB;
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .size-pill {
+      flex: 1;
+      text-align: center;
+      padding: 4px 6px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #4B5563;
+      transition: 0.2s;
+    }
+    .size-pill.selected {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 2px 6px rgba(211, 47, 47, 0.25);
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+      margin-top: auto;
+    }
+    .product-price {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .btn-group {
+      display: flex;
+      gap: 6px;
+    }
+    .btn-action {
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: 0.2s;
+    }
+    .btn-customize {
+      background: #FFF1F2;
+      color: var(--primary);
+      border: 1px solid #FECDD3;
+    }
+    .btn-customize:hover { background: #FFE4E6; }
+    .btn-add {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-add:hover { background: var(--primary-dark); }
+
+    /* Customization Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 14px;
+    }
+    .modal-card {
+      background: white;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      border-radius: 20px;
+      overflow-y: auto;
+      padding: 20px;
+      position: relative;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .close-modal {
+      background: #F3F4F6;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .modal-section-title {
+      font-size: 13px;
+      font-weight: 800;
+      margin: 12px 0 6px;
+      color: var(--dark);
+      display: flex;
+      justify-content: space-between;
+    }
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .option-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: #F9FAFB;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.15s;
+    }
+    .option-row.selected {
+      background: #FEF2F2;
+      border-color: var(--primary);
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .option-row input[type="radio"], .option-row input[type="checkbox"] {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+      margin-left: 8px;
+    }
+
+    /* Floating Cart Bar */
+    .cart-bar {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--dark);
+      color: white;
+      border-radius: 20px;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      cursor: pointer;
+      z-index: 100;
+      transform: translateY(120px);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .cart-bar.show { transform: translateY(0); }
+    .cart-bar-info { display: flex; align-items: center; gap: 12px; }
+    .cart-badge {
+      background: var(--primary);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .cart-bar-total { font-weight: 900; font-size: 17px; color: var(--secondary); }
+    .cart-bar-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    /* Cart Items list */
+    .cart-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 10px 12px;
+      background: #F9FAFB;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .cart-item-details { font-size: 11px; color: #6B7280; margin-top: 2px; line-height: 1.4; }
+    .qty-controls { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+    .qty-btn {
+      background: white;
+      border: 1px solid #D1D5DB;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Forms */
+    .form-group { margin-bottom: 10px; }
+    .form-group label { display: block; font-weight: 700; font-size: 12px; margin-bottom: 4px; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 13px;
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
+    .alert-box {
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 12px 0;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .submit-order-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+    }
+    .submit-order-btn:disabled { background: #9CA3AF; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="logo-area">
+        <h1>🍕 ميكسكانو | MIX CANO</h1>
+        <p>بلقاس - شارع المحكمة القديم | 01002066323</p>
+      </div>
+      <a href="tel:01002066323" class="contact-btn">
+        <i class="fa-solid fa-phone"></i> اتصال بالمطعم
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-overlay">
+        <h2>مطعم ميكسكانو - بلقاس 🍔</h2>
+        <p>اختر المقاس وحشو الأطراف والصوصات براحتك • خامات أصلية 100%</p>
+      </div>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" placeholder="ابحث في منيو ميكسكانو (مثال: رانش، زنجر، كونو، شاورما...)" oninput="handleSearch()">
+    </div>
+
+    <!-- Category Tabs with counts -->
+    <div class="categories-tabs" id="categoriesBar">
+      <button class="tab-btn active" onclick="filterCategory('all', this)">
+        <span><i class="fa-solid fa-utensils"></i> كل المنيو</span>
+        <span class="badge-count">79 صنف</span>
+      </button>
+      <button class="tab-btn" onclick="filterCategory('pizza', this)">
+        <span><i class="fa-solid fa-pizza-slice"></i> البيتزا الإيطالي</span>
+        <span class="badge-count">18 صنف</span>
+      </button>
+      <button class="tab-btn" onclick="filterCategory('crepe', this)">
+        <span><i class="fa-solid fa-stroopwafel"></i> الكريبات الحادقة</span>
+        <span class="badge-count">18 صنف</span>
+      </button>
+      <button class="tab-btn" onclick="filterCategory('cone', this)">
+        <span><i class="fa-solid fa-ice-cream"></i> كونو ميكسكانو</span>
+        <span class="badge-count">10 أصناف</span>
+      </button>
+      <button class="tab-btn" onclick="filterCategory('burger', this)">
+        <span><i class="fa-solid fa-burger"></i> البرجر الفاخر</span>
+        <span class="badge-count">6 أصناف</span>
+      </button>
+      <button class="tab-btn" onclick="filterCategory('sandwich', this)">
+        <span><i class="fa-solid fa-bread-slice"></i> السندوتشات</span>
+        <span class="badge-count">14 صنف</span>
+      </button>
+      <button class="tab-btn" onclick="filterCategory('sides', this)">
+        <span><i class="fa-solid fa-bowl-food"></i> البطاطس والإضافات</span>
+        <span class="badge-count">10 أصناف</span>
+      </button>
+      <button class="tab-btn" onclick="filterCategory('seafood', this)">
+        <span><i class="fa-solid fa-fish"></i> السي فود والجمبري</span>
+        <span class="badge-count">3 أصناف</span>
+      </button>
+    </div>
+
+    <!-- Active Category Header -->
+    <div class="section-title">
+      <span id="currentCategoryTitle">كل قائمة الطعام</span>
+      <span class="count" id="currentCategoryCount">79 صنف متاح</span>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="productsContainer">
+      <!-- Injected by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Bottom Floating Cart Bar -->
+  <div class="cart-bar" id="cartBar" onclick="openCartModal()">
+    <div class="cart-bar-info">
+      <div class="cart-badge" id="cartCount">0</div>
+      <div>
+        <div style="font-size: 11px; color: #BBB;">سلة مشترياتك</div>
+        <div class="cart-bar-total" id="cartTotal">0 ج.م</div>
+      </div>
+    </div>
+    <button class="cart-bar-btn">معاينة الطلب 🛒</button>
+  </div>
+
+  <!-- Customization Modal (Sizes + Crust + Add-ons) -->
+  <div class="modal-overlay" id="customizeModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 16px; font-weight: 800;" id="customItemName">تخصيص الوجبة</h3>
+          <p style="font-size: 11px; color: var(--text-muted);" id="customItemDesc"></p>
+        </div>
+        <button class="close-modal" onclick="closeCustomizeModal()">&times;</button>
+      </div>
+
+      <!-- Size Selection -->
+      <div id="sizeSection">
+        <div class="modal-section-title">
+          <span>اختر الحجم / المقاس المطلوب:</span>
+          <span style="color: var(--primary); font-size: 11px;">مطلوب</span>
+        </div>
+        <div class="options-grid" id="sizeOptionsList"></div>
+      </div>
+
+      <!-- Crust Selection (For Pizza only) -->
+      <div id="crustSection" style="display: none;">
+        <div class="modal-section-title">
+          <span>حشو الأطراف للبيتزا:</span>
+          <span style="color: #6B7280; font-size: 11px;">اختياري</span>
+        </div>
+        <div class="options-grid" id="crustOptionsList"></div>
+      </div>
+
+      <!-- Add-ons & Sauces -->
+      <div id="addonsSection">
+        <div class="modal-section-title">
+          <span>إضافات وصوصات جانبية:</span>
+          <span style="color: #6B7280; font-size: 11px;">اختياري</span>
+        </div>
+        <div class="options-grid" id="addonOptionsList"></div>
+      </div>
+
+      <!-- Live Calculated Price for this Item -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: #F3F4F6; padding: 12px; border-radius: 12px; margin: 16px 0 12px;">
+        <span style="font-weight: 800; font-size: 14px;">سعر الوجبة بالإضافات:</span>
+        <span style="color: var(--primary); font-weight: 900; font-size: 18px;" id="customItemPrice">0 ج.م</span>
+      </div>
+
+      <button type="button" class="submit-order-btn" onclick="confirmAddToCartFromModal()">
+        <i class="fa-solid fa-cart-plus"></i> أضف للسلة بالمواصفات دي
+      </button>
+    </div>
+  </div>
+
+  <!-- Cart / Checkout Modal -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 17px; font-weight: 800;"><i class="fa-solid fa-basket-shopping" style="color: var(--primary);"></i> سلة مشترياتك</h3>
+        <button class="close-modal" onclick="closeCartModal()">&times;</button>
+      </div>
+
+      <!-- Items in cart -->
+      <div class="cart-items-list" id="cartItemsList"></div>
+
+      <div style="display: flex; justify-content: space-between; font-weight: 900; font-size: 17px; margin-bottom: 14px; padding: 10px 12px; background: #F3F4F6; border-radius: 12px;">
+        <span>المجموع المطلوب:</span>
+        <span style="color: var(--primary);" id="modalTotal">0 ج.م</span>
+      </div>
+
+      <!-- Customer Form -->
+      <form id="orderForm" onsubmit="handleSendOrder(event)">
+        <div class="form-group">
+          <label>الاسم بالكامل *</label>
+          <input type="text" id="custName" required placeholder="أدخل اسمك الكريم">
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف للتأكيد (واتساب) *</label>
+          <input type="tel" id="custPhone" required placeholder="010xxxxxxxx">
+        </div>
+        <div class="form-group">
+          <label>العنوان في بلقاس بالتفصيل *</label>
+          <input type="text" id="custAddress" required placeholder="اسم الشارع، رقم البيت/العمارة، علامة مميزة">
+        </div>
+        <div class="form-group">
+          <label>ملاحظات إضافية على الأكل (اختياري)</label>
+          <textarea id="custNotes" rows="2" placeholder="أي إضافات مثل بدون بصل، زيادة كاتشب..."></textarea>
+        </div>
+
+        <div class="alert-box">
+          <i class="fa-solid fa-phone-volume" style="font-size: 20px;"></i>
+          <div><b>تأكيد الطلب والدفع:</b> سيتصل بك مسؤول المطعم فوراً لتأكيد طلبك وتحديد طريقة الدفع التي تناسبك (كاش عند الاستلام أو فودافون كاش).</div>
+        </div>
+
+        <button type="submit" class="submit-order-btn" id="submitBtn">
+          <span>إرسال الطلب لمطبخ ميكسكانو 🚀</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-card" style="text-align: center; padding: 30px 16px;">
+      <div style="font-size: 55px; color: var(--success); margin-bottom: 10px;">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h2 style="font-weight: 900; margin-bottom: 6px;">تم إرسال طلبك بنجاح! 🎉</h2>
+      <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">وصل إشعار طلبك في مطبخ ميكسكانو، وسنتصل بك هاتفياً فوراً لتأكيد الوجبة وتجهيزها.</p>
+      
+      <div style="background: #FEE2E2; color: var(--primary); padding: 12px; border-radius: 12px; font-weight: 900; font-size: 18px; margin-bottom: 20px;" id="orderSuccessCode">
+        كود الطلب: #MC-0000
+      </div>
+
+      <button class="submit-order-btn" onclick="location.reload()">طلب أوردر جديد 🍕</button>
+    </div>
+  </div>
+
+  <script>
+    const TELEGRAM_BOT_TOKEN = "8782336534:AAFnXu1gXMnSnVYuSrNBdzbo9-rGll78HU8";
+    const TELEGRAM_CHAT_ID = "7469041086";
+
+    // Pizza Crusts
+    const pizzaCrustOptions = [
+      { name: "بدون حشو أطراف (عادي)", price: 0 },
+      { name: "حشو أطراف جبنة كيري", price: 30 },
+      { name: "حشو أطراف سوسيس", price: 35 },
+      { name: "حشو أطراف جبنة موتزاريلا", price: 30 },
+      { name: "كونو أطراف ميكسكانو", price: 40 }
+    ];
+
+    // General Addons & Sauces
+    const generalAddons = [
+      { name: "اكسترا جبنة موتزاريلا ذائبة", price: 25 },
+      { name: "صوص رانش إضافي", price: 15 },
+      { name: "صوص شيدر سايح", price: 15 },
+      { name: "صوص باربيكيو مدخن", price: 15 },
+      { name: "صوص تايجر حار ناري", price: 20 },
+      { name: "فلفل هالبينو سبايسي", price: 10 },
+      { name: "اكسترا كرانشي مقرمش", price: 30 }
+    ];
+
+    // Complete Database (79 Authentic Items with exact Sizes & Prices)
+    const menuItems = [
+      // ==================== البيتزا الإيطالي (18 صنف) ====================
+      { id: 1, name: "بيتزا مرجريتا", cat: "pizza", desc: "صلصة طماطم إيطالية خاصة، جبنة موتزاريلا غنية وريحان طازج", tag: "", sizes: [{ label: "وسط", price: 150 }, { label: "كبير", price: 180 }] },
+      { id: 2, name: "بيتزا ميكس جبن", cat: "pizza", desc: "موتزاريلا، جبنة شيدر أمريكية، جبنة رومي مبشورة، وكيري كريمي", tag: "الأكثر طلباً", sizes: [{ label: "وسط", price: 160 }, { label: "كبير", price: 190 }] },
+      { id: 3, name: "بيتزا اكسترا تشيز", cat: "pizza", desc: "طبقات مضاعفة فائقة من الجبن الموتزاريلا الذائبة الغنية", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 220 }] },
+      { id: 4, name: "بيتزا شاورما فراخ", cat: "pizza", desc: "شاورما دجاج متبلة بخلطة مسكانو الأصلية، طماطم وفلفل ألوان", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
+      { id: 5, name: "بيتزا شيش طاووق", cat: "pizza", desc: "مكعبات شيش طاووق مشوي على الجريل مع بصل مكرمل وفلفل", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
+      { id: 6, name: "بيتزا ميكس تشيكن", cat: "pizza", desc: "دجاج كرسبي مقرمش + شيش طاووق + شاورما دجاج مميزة", tag: "سبيشال", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+      { id: 7, name: "بيتزا تشكن رانش", cat: "pizza", desc: "دجاج مقرمش مع صصوص الرانش الغني، فلفل أخضر وزيتون وموتزاريلا", tag: "الأعلى تقييماً", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+      { id: 8, name: "بيتزا تشكن باربيكيو", cat: "pizza", desc: "دجاج متبل بصوص الباربيكيو المدخن وموتزاريلا وبصل مقرمش", tag: "", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+      { id: 9, name: "بيتزا استربس رانش", cat: "pizza", desc: "قطع استربس دجاج ذهبي مقرمش مع شلال من صوص الرانش اللذيذ", tag: "قنبلة", sizes: [{ label: "وسط", price: 200 }, { label: "كبير", price: 230 }] },
+      { id: 10, name: "بيتزا سوبريم دجاج", cat: "pizza", desc: "قطع دجاج، مشروم طازج، فلفل ألوان، زيتون أسود وموتزاريلا", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
+      { id: 11, name: "بيتزا سوبريم لحمة", cat: "pizza", desc: "لحم مفروم بلدي، سجق شرقي متبل، فلفل وخضروات مشكلة", tag: "", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+      { id: 12, name: "بيتزا بانية كرانشي", cat: "pizza", desc: "بانية مقرمش كرانشي مع جبنة موتزاريلا وصوصات خاصة", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
+      { id: 13, name: "بيتزا استربس زنجر", cat: "pizza", desc: "استربس دجاج زنجر حار سبايسي مع هلابينو وجبنة موتزاريلا سايحة", tag: "حار سبايسي", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+      { id: 14, name: "بيتزا زنجر سوبريم", cat: "pizza", desc: "خلطة زنجر حار فاخرة مع مشروم وخضروات وموتزاريلا", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
+      { id: 15, name: "بيتزا شاورما لحمة", cat: "pizza", desc: "شاورما لحم بلدي شهي مع طحينة وطماطم وفلفل ألوان", tag: "", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+      { id: 16, name: "بيتزا ديلوكس بيف", cat: "pizza", desc: "ميكس لحوم فاخرة (روست بيف، بيف بيكون، لحم مفروم، موتزاريلا)", tag: "", sizes: [{ label: "وسط", price: 200 }, { label: "كبير", price: 230 }] },
+      { id: 17, name: "بيتزا بيبروني", cat: "pizza", desc: "شرائح بيبروني بقري مدخن فاخر مع جبنة موتزاريلا وفيرة", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
+      { id: 18, name: "بيتزا بسطرمة", cat: "pizza", desc: "بسطرمة بلدي منتقاة مع زيتون وفلفل رومي وجبنة موتزاريلا", tag: "", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+
+      // ==================== الكريبات الحادقة (18 صنف) ====================
+      { id: 19, name: "كريب بانية ناجتس", cat: "crepe", desc: "قطع بانية ناجتس ذهبية مع صوص الجبن والبطاطس", tag: "", sizes: [{ label: "حجم عادي", price: 90 }, { label: "حجم سوبر جامبو", price: 120 }] },
+      { id: 20, name: "كريب كرانشي ناجتس", cat: "crepe", desc: "ناجتس دجاج فائق القرمشة مع فلفل وموتزاريلا سايحة", tag: "", sizes: [{ label: "حجم عادي", price: 100 }, { label: "حجم سوبر جامبو", price: 130 }] },
+      { id: 21, name: "كريب زنجر سوبريم ناجتس", cat: "crepe", desc: "زنجر حار سبايسي مقرمش مع جبنة سايحة وخضروات", tag: "سبايسي", sizes: [{ label: "حجم عادي", price: 100 }, { label: "حجم سوبر جامبو", price: 130 }] },
+      { id: 22, name: "كريب استربس فيلية زنجر", cat: "crepe", desc: "أصابع فيليه استربس زنجر متبلة حارة مع صوص الجبن والموتزاريلا", tag: "الأكثر طلباً", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
+      { id: 23, name: "كريب اكسترا كرانشي", cat: "crepe", desc: "كمية مضاعفة من قطع الكرانشي الذهبية مع ميكس صوصات", tag: "حجم كبير", sizes: [{ label: "حجم عادي", price: 140 }, { label: "حجم سوبر جامبو", price: 170 }] },
+      { id: 24, name: "كريب اكسترا زنجر سوبريم", cat: "crepe", desc: "جرعة مضاعفة من الزنجر السبايسي الفاخر والموتزاريلا", tag: "دبل زنجر", sizes: [{ label: "حجم عادي", price: 140 }, { label: "حجم سوبر جامبو", price: 170 }] },
+      { id: 25, name: "كريب كوردن بلو", cat: "crepe", desc: "رول كوردن بلو محشو جبنة ذائبة ومقلي مقرمش", tag: "", sizes: [{ label: "حجم عادي", price: 120 }, { label: "حجم سوبر جامبو", price: 150 }] },
+      { id: 26, name: "كريب شاورما دجاج MIX", cat: "crepe", desc: "شاورما دجاج متبلة مع صوص الثومية والموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 120 }, { label: "حجم سوبر جامبو", price: 150 }] },
+      { id: 27, name: "كريب شيش طاووق MIX", cat: "crepe", desc: "قطع شيش طاووق مشوي غض مع فلفل وموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 120 }, { label: "حجم سوبر جامبو", price: 150 }] },
+      { id: 28, name: "كريب فاهيتا", cat: "crepe", desc: "دجاج فاهيتا مكسيكي مع بصل وفلفل ألوان وصوص تايجر", tag: "", sizes: [{ label: "حجم عادي", price: 120 }, { label: "حجم سوبر جامبو", price: 150 }] },
+      { id: 29, name: "كريب شيش تندوري", cat: "crepe", desc: "شيش طاووق متبل ببهارات التندوري الهندية الشهية", tag: "", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
+      { id: 30, name: "كريب فيلية صدور تندوري", cat: "crepe", desc: "صدور دجاج فيليه طرية بتتبيلة التندوري الغنية", tag: "", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
+      { id: 31, name: "كريب اسكالوب بانية", cat: "crepe", desc: "شرائح اسكالوب بانية متبلة ومقرمشة مع جبنة ومخلل", tag: "", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
+      { id: 32, name: "كريب شاورما لحمة", cat: "crepe", desc: "شاورما لحم بلدي طازجة مع بقدونس وطماطم وموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 140 }, { label: "حجم سوبر جامبو", price: 170 }] },
+      { id: 33, name: "كريب كفتة مشوي", cat: "crepe", desc: "كفتة لحم مشوية على الفحم مع صوص طحينة وموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
+      { id: 34, name: "كريب هوت دوج MIX", cat: "crepe", desc: "قطع هوت دوج مشوية مع خلطة خضروات وموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 110 }, { label: "حجم سوبر جامبو", price: 140 }] },
+      { id: 35, name: "كريب ميكس جبن", cat: "crepe", desc: "تشكيلة من الجبن الرومي والشيدر والموتزاريلا الغنية", tag: "", sizes: [{ label: "حجم عادي", price: 80 }, { label: "حجم سوبر جامبو", price: 110 }] },
+      { id: 36, name: "كريب تشيز بطاطس", cat: "crepe", desc: "بطاطس مقرمشة ذهبية مع صوص الجبن الشيدر والموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 80 }, { label: "حجم سوبر جامبو", price: 110 }] },
+
+      // ==================== كونو ميكسكانو المميز (10 أصناف) ====================
+      { id: 37, name: "ميكس فراير M4", cat: "cone", desc: "بانية ناجتس - هوت دوج - استربس مقرمش - كوردن بلو مع صوصات وجبن", tag: "M4 سبيشال", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
+      { id: 38, name: "ميكس كانو هوت M7", cat: "cone", desc: "شيش طاووق - استربس - بانية ناجتس - هوت دوج - أصابع موتزاريلا", tag: "الأعلى طلباً", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
+      { id: 39, name: "ميكسكاوي", cat: "cone", desc: "كوردن بلو - استربس - ريستو / رومي - أصابع موتزاريلا سايحة", tag: "", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
+      { id: 40, name: "هوبا تشيكن", cat: "cone", desc: "ريستو / رومي - كوردن - استربس - شيش طاووق - أصابع موتزاريلا غنية", tag: "سوبر دجاج", sizes: [{ label: "عادي", price: 180 }, { label: "دبل حشو جبنة", price: 215 }] },
+      { id: 41, name: "كرانشيتو", cat: "cone", desc: "شيش - استربس كرانشي - ريستو / رومي - أصابع موتزاريلا وصوصات", tag: "", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
+      { id: 42, name: "قنبلة MIX", cat: "cone", desc: "فيلية تندوري هندي - برجر لحم 100 جرام - تشكن كرسبي مقرمش", tag: "قنبلة الميكس", sizes: [{ label: "عادي", price: 180 }, { label: "دبل حشو جبنة", price: 215 }] },
+      { id: 43, name: "تايجر MIX", cat: "cone", desc: "ناشفال حار - شيش تندوري - هوت دوج MIX مع صوص تايجر الناري", tag: "ناري سبايسي", sizes: [{ label: "عادي", price: 180 }, { label: "دبل حشو جبنة", price: 215 }] },
+      { id: 44, name: "فرانسيسكو", cat: "cone", desc: "بانية ناجتس - استربس - صوابع موتزاريلا - بسطرمة بلدي مع صوص الجبن", tag: "", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
+      { id: 45, name: "ميجا ميكس بيف", cat: "cone", desc: "ميكس لحوم فاخرة مطهوة على الجريل مع جبنة شيدر وموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 180 }, { label: "دبل حشو جبنة", price: 215 }] },
+      { id: 46, name: "ميكس كانو كونو الخاص", cat: "cone", desc: "كوردن بلو محشو جبن - شيش طاووق متبل - روست رومي مدخن", tag: "توقيع المحل", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
+
+      // ==================== البرجر الفاخر (6 أصناف) ====================
+      { id: 47, name: "برجر كلاسيك", cat: "burger", desc: "صوص ميكسكانو الخاص - خس طازج - بصل مكرمل - خيار مخلل مقرمش", tag: "", sizes: [{ label: "سينجل 100جم", price: 120 }, { label: "دبل 200جم", price: 155 }] },
+      { id: 48, name: "برجر بيف تشيز", cat: "burger", desc: "صوص مسكانو - خس - بصل مكرمل - خيار مخلل - شريحة جبنة شيدر ذائبة", tag: "الأكثر طلباً", sizes: [{ label: "سينجل 100جم", price: 130 }, { label: "دبل 200جم", price: 165 }] },
+      { id: 49, name: "برجر هامر", cat: "burger", desc: "حلقات البصل المقرمشة - أصابع موتزاريلا سايحة - صوص باربيكيو مميز", tag: "قنبلة المطعم", sizes: [{ label: "سينجل 100جم", price: 140 }, { label: "دبل 200جم", price: 175 }] },
+      { id: 50, name: "برجر بيف سموكي", cat: "burger", desc: "خس مقرمش - طماطم - صوص مدخن - شرائح روستوبيف فاخرة", tag: "", sizes: [{ label: "سينجل 100جم", price: 130 }, { label: "دبل 200جم", price: 165 }] },
+      { id: 51, name: "برجر بيج تيستي", cat: "burger", desc: "خس - طماطم - خيار مخلل - صوص بيج تيستي - قطع هوت دوج متبلة", tag: "", sizes: [{ label: "سينجل 100جم", price: 130 }, { label: "دبل 200جم", price: 165 }] },
+      { id: 52, name: "برجر تشيكن تشيز", cat: "burger", desc: "فيليه دجاج كرسبي - خس مقرمش - طماطم - خيار مخلل - صوص جبن شيدر", tag: "", sizes: [{ label: "سينجل 100جم", price: 130 }, { label: "دبل 200جم", price: 165 }] },
+
+      // ==================== السندوتشات (14 صنف) ====================
+      { id: 53, name: "سندوتش بانية ناجتس", cat: "sandwich", desc: "بانية ناجتس مقرمش مع خيار مخلل وصوص مايونيز وثومية", tag: "", sizes: [{ label: "وسط", price: 50 }, { label: "كبير", price: 70 }, { label: "عيش سوري", price: 70 }] },
+      { id: 54, name: "سندوتش كرانشي ناجتس", cat: "sandwich", desc: "ناجتس كرانشي شديد القرمشة مع بطاطس وصوص خاص", tag: "", sizes: [{ label: "وسط", price: 60 }, { label: "كبير", price: 80 }, { label: "عيش سوري", price: 80 }] },
+      { id: 55, name: "سندوتش زنجر سوبريم ناجتس", cat: "sandwich", desc: "خلطة زنجر حار سبايسي لمحبي النكهات القوية المقرمشة", tag: "سبايسي", sizes: [{ label: "وسط", price: 60 }, { label: "كبير", price: 80 }, { label: "عيش سوري", price: 80 }] },
+      { id: 56, name: "سندوتش كوردن بلو", cat: "sandwich", desc: "كوردن بلو رول مع جبنة ذائبة وصوص شيدر", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 90 }, { label: "عيش سوري", price: 90 }] },
+      { id: 57, name: "سندوتش كفتة بلدي مشوية", cat: "sandwich", desc: "أصابع كفتة لحم بلدي مشوية مع بقدونس وطحينة", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 90 }, { label: "عيش سوري", price: 90 }] },
+      { id: 58, name: "سندوتش شاورما لحمة", cat: "sandwich", desc: "شاورما لحم بلدي على السيخ متبلة مع صوص طحينة", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 100 }, { label: "عيش سوري", price: 100 }] },
+      { id: 59, name: "سندوتش استربس فيلية", cat: "sandwich", desc: "استربس صدور دجاج فيليه طازجة مقرمشة", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 90 }, { label: "عيش سوري", price: 90 }] },
+      { id: 60, name: "سندوتش شيش تندوري", cat: "sandwich", desc: "شيش طاووق تندوري هندي متبل بخلطة مميزة", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 100 }, { label: "عيش سوري", price: 100 }] },
+      { id: 61, name: "سندوتش شاورما دجاج", cat: "sandwich", desc: "شاورما دجاج على الجريل مع ثومية وبطاطس وخيار مخلل", tag: "الأكثر طلباً", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 90 }, { label: "عيش سوري", price: 90 }] },
+      { id: 62, name: "سندوتش مشوي صدور تندوري", cat: "sandwich", desc: "صدور دجاج مشوية على الجريل بتتبيلة تندوري صحية", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 100 }, { label: "عيش سوري", price: 100 }] },
+      { id: 63, name: "سندوتش اكسترا كرانشي", cat: "sandwich", desc: "كمية مضاعفة من الدجاج المقرمش كرانشي", tag: "", sizes: [{ label: "كبير جامبو", price: 80 }, { label: "عيش سوري سوبر", price: 80 }] },
+      { id: 64, name: "سندوتش اكسترا زنجر", cat: "sandwich", desc: "جرعة حارة مضاعفة من قطع استربس زنجر سبايسي", tag: "", sizes: [{ label: "كبير جامبو", price: 80 }, { label: "عيش سوري سوبر", price: 80 }] },
+      { id: 65, name: "سندوتش بطاطس سادة", cat: "sandwich", desc: "أصابع بطاطس فارم فريتس مقلية مقرمشة ومتبلة", tag: "", sizes: [{ label: "وسط", price: 40 }, { label: "كبير", price: 55 }, { label: "عيش سوري", price: 55 }] },
+      { id: 66, name: "سندوتش بطاطس تشيز", cat: "sandwich", desc: "بطاطس مقلية ذهبية غارقة في صوص الجبنة الشيدر اللذيذ", tag: "", sizes: [{ label: "وسط", price: 50 }, { label: "كبير", price: 65 }, { label: "عيش سوري", price: 65 }] },
+
+      // ==================== البطاطس والإضافات والصوصات (10 أصناف) ====================
+      { id: 67, name: "باكيت بطاطس مقلية", cat: "sides", desc: "باكيت بطاطس مقلية مقرمشة مع بهارات خاصة", tag: "", sizes: [{ label: "باكيت قياسي", price: 35 }] },
+      { id: 68, name: "بطاطس تشيز", cat: "sides", desc: "باكيت بطاطس مع صوص شيدر وموتزاريلا سايحة", tag: "جبن سايح", sizes: [{ label: "باكيت قياسي", price: 45 }] },
+      { id: 69, name: "بطاطس فريسكاس", cat: "sides", desc: "بطاطس فريسكاس متبلة بتوابل سرية مقرمشة", tag: "", sizes: [{ label: "باكيت قياسي", price: 50 }] },
+      { id: 70, name: "طبق بطاطس استربس", cat: "sides", desc: "طبق بطاطس محمل بقطع استربس الدجاج وصوص الشيدر", tag: "وجبة جانبية", sizes: [{ label: "طبق كبير", price: 120 }] },
+      { id: 71, name: "بطاطس هالبينو حار", cat: "sides", desc: "بطاطس حارة مع حلقات هلابينو وجبنة ذائبة", tag: "حار", sizes: [{ label: "طبق قياسي", price: 65 }] },
+      { id: 72, name: "علبة كول سلو طازجة", cat: "sides", desc: "سلطة كول سلو طازجة بصلصة المايونيز والعسل", tag: "", sizes: [{ label: "علبة", price: 35 }] },
+      { id: 73, name: "كوب صوص باربيكيو", cat: "sides", desc: "صوص باربيكيو مدخن أصلي", tag: "صوص", sizes: [{ label: "كوب", price: 20 }] },
+      { id: 74, name: "كوب صوص شيدر", cat: "sides", desc: "صوص جبنة شيدر كريمي دافئ", tag: "صوص", sizes: [{ label: "كوب", price: 10 }] },
+      { id: 75, name: "كوب صوص تايجر", cat: "sides", desc: "صوص تايجر حار مميز بمذاق ناري", tag: "صوص", sizes: [{ label: "كوب", price: 20 }] },
+      { id: 76, name: "كوب صوص ديناميت", cat: "sides", desc: "صوص ديناميت سبايسي كريمي فاخر", tag: "صوص", sizes: [{ label: "كوب", price: 30 }] },
+
+      // ==================== السي فود والجمبري (3 أصناف) ====================
+      { id: 77, name: "وجبة جمبري مشوي", cat: "seafood", desc: "جمبري بلدي طازج مشوي بالأعشاب والليمون والثوم مع أرز وسلطات", tag: "طازج", sizes: [{ label: "وجبة عادية", price: 220 }, { label: "وجبة دبل جمبري", price: 290 }] },
+      { id: 78, name: "وجبة جمبري كرسبي", cat: "seafood", desc: "جمبري مقلي ذهبي مقرمش مع صوص تارتار وليمون وبطاطس", tag: "", sizes: [{ label: "وجبة عادية", price: 220 }, { label: "وجبة دبل جمبري", price: 290 }] },
+      { id: 79, name: "وجبة ميكس سي فود", cat: "seafood", desc: "طبق مشكل فاخر (جمبري + سبيط + فيليه سمك) مشوي أو مقلي", tag: "سبيشال", sizes: [{ label: "وجبة عادية", price: 240 }, { label: "وجبة دبل بحري", price: 320 }] }
+    ];
+
+    // Selected size cache per product card: { [productId]: sizeIndex }
+    const selectedSizeMap = {};
+
+    // Cart state
+    let cart = [];
+    let currentCategory = 'all';
+
+    // Currently customizing item
+    let customizingItem = null;
+    let modalSelectedSizeIdx = 0;
+    let modalSelectedCrustIdx = 0;
+    let modalSelectedAddons = new Set();
+
+    const categoryNames = {
+      'all': 'كل قائمة الطعام',
+      'pizza': 'البيتزا الإيطالي',
+      'crepe': 'الكريبات الحادقة',
+      'cone': 'كونو ميكسكانو المميز',
+      'burger': 'البرجر الفاخر',
+      'sandwich': 'السندوتشات السريعة',
+      'sides': 'البطاطس والإضافات والصوصات',
+      'seafood': 'السي فود والجمبري'
+    };
+
+    // Render Product Cards
+    function renderProducts(items) {
+      const container = document.getElementById("productsContainer");
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #888;">
+            <i class="fa-solid fa-utensils" style="font-size: 40px; margin-bottom: 10px; color: #CCC;"></i>
+            <p>لم نجد أي وجبة مطابقة لبحثك، جرب كلمة تانية!</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map(p => {
+        const currentSizeIdx = selectedSizeMap[p.id] !== undefined ? selectedSizeMap[p.id] : 0;
+        const currentPrice = p.sizes[currentSizeIdx].price;
+
+        const sizesHtml = p.sizes.length > 1 ? `
+          <div class="card-sizes-selector">
+            ${p.sizes.map((s, idx) => `
+              <div class="size-pill ${idx === currentSizeIdx ? 'selected' : ''}" onclick="onCardSelectSize(${p.id}, ${idx})">
+                ${s.label} (${s.price}ج)
+              </div>
+            `).join("")}
+          </div>
+        ` : '';
+
+        const hasCustomization = p.cat === 'pizza' || p.sizes.length > 1 || p.cat === 'crepe' || p.cat === 'cone' || p.cat === 'burger';
+
+        return `
+          <div class="product-card" id="card-${p.id}">
+            <div>
+              <div class="card-top">
+                <h3 class="product-title">${p.name}</h3>
+                ${p.tag ? `<span class="badge-tag">${p.tag}</span>` : ''}
+              </div>
+              <p class="product-desc">${p.desc}</p>
+              ${sizesHtml}
+            </div>
+            <div class="product-footer">
+              <span class="product-price" id="card-price-${p.id}">${currentPrice} ج.م</span>
+              <div class="btn-group">
+                ${hasCustomization ? `
+                  <button type="button" class="btn-action btn-customize" onclick="openCustomizeModal(${p.id})">
+                    <i class="fa-solid fa-sliders"></i> تخصيص
+                  </button>
+                ` : ''}
+                <button type="button" class="btn-action btn-add" onclick="quickAddToCart(${p.id})">
+                  <i class="fa-solid fa-plus"></i> إضافة
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Direct switch of size on the card
+    function onCardSelectSize(productId, sizeIdx) {
+      selectedSizeMap[productId] = sizeIdx;
+      const item = menuItems.find(p => p.id === productId);
+      if (!item) return;
+      const card = document.getElementById(`card-${productId}`);
+      if (!card) return;
+
+      const pills = card.querySelectorAll(".size-pill");
+      pills.forEach((pill, idx) => {
+        if (idx === sizeIdx) pill.classList.add("selected");
+        else pill.classList.remove("selected");
+      });
+
+      const priceEl = document.getElementById(`card-price-${productId}`);
+      if (priceEl) priceEl.innerText = `${item.sizes[sizeIdx].price} ج.م`;
+    }
+
+    // Quick add to cart using the currently selected size on card
+    function quickAddToCart(productId) {
+      const item = menuItems.find(p => p.id === productId);
+      if (!item) return;
+      const sizeIdx = selectedSizeMap[productId] !== undefined ? selectedSizeMap[productId] : 0;
+      const sizeObj = item.sizes[sizeIdx];
+
+      addToCartDetailed(item, sizeObj.label, sizeObj.price, null, []);
+    }
+
+    // Open Customization Modal
+    function openCustomizeModal(productId) {
+      customizingItem = menuItems.find(p => p.id === productId);
+      if (!customizingItem) return;
+
+      modalSelectedSizeIdx = selectedSizeMap[productId] !== undefined ? selectedSizeMap[productId] : 0;
+      modalSelectedCrustIdx = 0;
+      modalSelectedAddons.clear();
+
+      document.getElementById("customItemName").innerText = customizingItem.name;
+      document.getElementById("customItemDesc").innerText = customizingItem.desc;
+
+      // Sizes List
+      const sizeList = document.getElementById("sizeOptionsList");
+      sizeList.innerHTML = customizingItem.sizes.map((s, idx) => `
+        <label class="option-row ${idx === modalSelectedSizeIdx ? 'selected' : ''}" onclick="onModalSizeChange(${idx})">
+          <div>
+            <input type="radio" name="modalSize" ${idx === modalSelectedSizeIdx ? 'checked' : ''}>
+            <span>${s.label}</span>
+          </div>
+          <span style="font-weight:900;">${s.price} ج.م</span>
+        </label>
+      `).join("");
+
+      // Pizza Crust List
+      const crustSection = document.getElementById("crustSection");
+      if (customizingItem.cat === 'pizza') {
+        crustSection.style.display = "block";
+        const crustList = document.getElementById("crustOptionsList");
+        crustList.innerHTML = pizzaCrustOptions.map((c, idx) => `
+          <label class="option-row ${idx === modalSelectedCrustIdx ? 'selected' : ''}" onclick="onModalCrustChange(${idx})">
+            <div>
+              <input type="radio" name="modalCrust" ${idx === modalSelectedCrustIdx ? 'checked' : ''}>
+              <span>${c.name}</span>
+            </div>
+            <span style="font-weight:900;">${c.price > 0 ? `+${c.price} ج.م` : 'مجاناً'}</span>
+          </label>
+        `).join("");
+      } else {
+        crustSection.style.display = "none";
+      }
+
+      // Addons List
+      const addonsList = document.getElementById("addonOptionsList");
+      addonsList.innerHTML = generalAddons.map((a, idx) => `
+        <label class="option-row" id="addon-row-${idx}" onclick="toggleModalAddon(${idx}, this)">
+          <div>
+            <input type="checkbox" id="addon-check-${idx}">
+            <span>${a.name}</span>
+          </div>
+          <span style="font-weight:900;">+${a.price} ج.م</span>
+        </label>
+      `).join("");
+
+      updateModalPrice();
+      document.getElementById("customizeModal").style.display = "flex";
+    }
+
+    function onModalSizeChange(idx) {
+      modalSelectedSizeIdx = idx;
+      const rows = document.querySelectorAll("#sizeOptionsList .option-row");
+      rows.forEach((r, i) => {
+        if (i === idx) {
+          r.classList.add("selected");
+          r.querySelector("input").checked = true;
+        } else {
+          r.classList.remove("selected");
+        }
+      });
+      updateModalPrice();
+    }
+
+    function onModalCrustChange(idx) {
+      modalSelectedCrustIdx = idx;
+      const rows = document.querySelectorAll("#crustOptionsList .option-row");
+      rows.forEach((r, i) => {
+        if (i === idx) {
+          r.classList.add("selected");
+          r.querySelector("input").checked = true;
+        } else {
+          r.classList.remove("selected");
+        }
+      });
+      updateModalPrice();
+    }
+
+    function toggleModalAddon(idx, element) {
+      const checkbox = document.getElementById(`addon-check-${idx}`);
+      if (modalSelectedAddons.has(idx)) {
+        modalSelectedAddons.delete(idx);
+        checkbox.checked = false;
+        element.classList.remove("selected");
+      } else {
+        modalSelectedAddons.add(idx);
+        checkbox.checked = true;
+        element.classList.add("selected");
+      }
+      updateModalPrice();
+    }
+
+    function updateModalPrice() {
+      if (!customizingItem) return;
+      let total = customizingItem.sizes[modalSelectedSizeIdx].price;
+
+      if (customizingItem.cat === 'pizza') {
+        total += pizzaCrustOptions[modalSelectedCrustIdx].price;
+      }
+
+      modalSelectedAddons.forEach(idx => {
+        total += generalAddons[idx].price;
+      });
+
+      document.getElementById("customItemPrice").innerText = `${total} ج.م`;
+    }
+
+    function closeCustomizeModal() {
+      document.getElementById("customizeModal").style.display = "none";
+      customizingItem = null;
+    }
+
+    function confirmAddToCartFromModal() {
+      if (!customizingItem) return;
+      const sizeObj = customizingItem.sizes[modalSelectedSizeIdx];
+      const crustObj = customizingItem.cat === 'pizza' && modalSelectedCrustIdx > 0 ? pizzaCrustOptions[modalSelectedCrustIdx] : null;
+
+      const chosenAddons = [];
+      modalSelectedAddons.forEach(idx => chosenAddons.push(generalAddons[idx]));
+
+      let unitPrice = sizeObj.price + (crustObj ? crustObj.price : 0);
+      chosenAddons.forEach(a => unitPrice += a.price);
+
+      addToCartDetailed(customizingItem, sizeObj.label, unitPrice, crustObj ? crustObj.name : null, chosenAddons.map(a => a.name));
+      closeCustomizeModal();
+    }
+
+    // Add Detailed Item to Cart
+    function addToCartDetailed(item, sizeLabel, unitPrice, crustName, addonsList) {
+      // Unique key for exact configuration
+      const configKey = `${item.id}|${sizeLabel}|${crustName || ''}|${addonsList.join(',')}`;
+      const existing = cart.find(c => c.configKey === configKey);
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          configKey,
+          id: item.id,
+          name: item.name,
+          sizeLabel,
+          unitPrice,
+          crustName,
+          addonsList,
+          qty: 1
+        });
+      }
+
+      updateCartUI();
+    }
+
+    function updateQty(configKey, delta) {
+      const item = cart.find(i => i.configKey === configKey);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.configKey !== configKey);
+      }
+      updateCartUI();
+      renderCartModal();
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+
+      document.getElementById("cartCount").innerText = totalCount;
+      document.getElementById("cartTotal").innerText = `${totalPrice} ج.م`;
+      document.getElementById("modalTotal").innerText = `${totalPrice} ج.م`;
+
+      const bar = document.getElementById("cartBar");
+      if (totalCount > 0) bar.classList.add("show");
+      else {
+        bar.classList.remove("show");
+        closeCartModal();
+      }
+    }
+
+    function renderCartModal() {
+      const list = document.getElementById("cartItemsList");
+      if (cart.length === 0) {
+        list.innerHTML = "<p style='text-align:center; color:#999; padding: 20px;'>سلة مشترياتك فارغة حالياً</p>";
+        return;
+      }
+
+      list.innerHTML = cart.map(item => `
+        <div class="cart-item-row">
+          <div>
+            <div style="font-weight:800; font-size:14px;">${item.name} (${item.sizeLabel})</div>
+            <div class="cart-item-details">
+              ${item.crustName ? `• أطراف: ${item.crustName}<br>` : ''}
+              ${item.addonsList.length > 0 ? `• إضافات: ${item.addonsList.join(' + ')}<br>` : ''}
+            </div>
+            <div style="font-size:12px; color:var(--primary); font-weight:bold; margin-top:2px;">
+              ${item.unitPrice * item.qty} ج.م (${item.unitPrice} ج × ${item.qty})
+            </div>
+          </div>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="updateQty('${item.configKey}', 1)">+</button>
+            <span style="font-weight:bold; font-size:13px; min-width:18px; text-align:center;">${item.qty}</span>
+            <button type="button" class="qty-btn" onclick="updateQty('${item.configKey}', -1)">-</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openCartModal() {
+      renderCartModal();
+      document.getElementById("cartModal").style.display = "flex";
+    }
+
+    function closeCartModal() {
+      document.getElementById("cartModal").style.display = "none";
+    }
+
+    // Filter categories
+    function filterCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      document.getElementById("searchInput").value = "";
+
+      const filtered = cat === 'all' ? menuItems : menuItems.filter(p => p.cat === cat);
+      document.getElementById("currentCategoryTitle").innerText = categoryNames[cat];
+      document.getElementById("currentCategoryCount").innerText = `${filtered.length} صنف متاح`;
+      renderProducts(filtered);
+    }
+
+    // Search bar
+    function handleSearch() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      if (!query) {
+        filterCategory(currentCategory, null);
+        return;
+      }
+      const results = menuItems.filter(p => 
+        p.name.toLowerCase().includes(query) || 
+        p.desc.toLowerCase().includes(query) ||
+        (p.tag && p.tag.toLowerCase().includes(query))
+      );
+      document.getElementById("currentCategoryTitle").innerText = `نتائج البحث عن "${query}"`;
+      document.getElementById("currentCategoryCount").innerText = `${results.length} صنف`;
+      renderProducts(results);
+    }
+
+    // Send Order to Telegram Bot
+    async function handleSendOrder(e) {
+      e.preventDefault();
+      if (cart.length === 0) return;
+
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> جاري إرسال الطلب لميكسكانو...";
+
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+      const notes = document.getElementById("custNotes").value.trim();
+      const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
+      const orderCode = Math.floor(1000 + Math.random() * 9000);
+
+      const itemsText = cart.map(i => {
+        let details = `• <b>${i.name}</b> (${i.sizeLabel}) [×${i.qty}] = ${i.unitPrice * i.qty} ج.م`;
+        if (i.crustName) details += `\n   └ 🧀 أطراف: ${i.crustName}`;
+        if (i.addonsList.length > 0) details += `\n   └ 🥫 إضافات: ${i.addonsList.join(' + ')}`;
+        return details;
+      }).join("\n");
+
+      const telegramMessage = 
+`🔥 <b>طلب أونلاين جديد عبر الموقع - ميكسكانو</b> 🔥
+━━━━━━━━━━━━━━━━━━━━
+🆔 <b>كود الطلب:</b> #${orderCode}
+👤 <b>العميل:</b> ${name}
+📞 <b>التليفون:</b> ${phone}
+📍 <b>العنوان في بلقاس:</b> ${address}
+
+🍔 <b>الوجبات والمواصفات المطلوبة:</b>
+${itemsText}
+
+💰 <b>الإجمالي المطلوب:</b> <b>${total} ج.م</b>
+💳 <b>طريقة الدفع:</b> الاتصال لتحديد كاش أو فودافون كاش
+${notes ? `📝 <b>ملاحظات العميل:</b> ${notes}\n` : ""}━━━━━━━━━━━━━━━━━━━━
+👨‍🍳 <i>يرجى سرعة الاتصال بالزبون وتجهيز الأوردر فوراً!</i>`;
+
+      try {
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: telegramMessage,
+            parse_mode: "HTML"
+          })
+        });
+
+        if (response.ok) {
+          closeCartModal();
+          document.getElementById("orderSuccessCode").innerText = `كود طلبك: #${orderCode}`;
+          document.getElementById("successModal").style.display = "flex";
+          cart = [];
+          updateCartUI();
+        } else {
+          alert("حدث خطأ أثناء إرسال الطلب. يرجى الاتصال هاتفياً على 01002066323");
+        }
+      } catch (err) {
+        alert("يرجى التأكد من اتصال الإنترنت أو الاتصال بنا مباشرة على 01002066323");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "<span>إرسال الطلب لمطبخ ميكسكانو 🚀</span>";
+      }
+    }
+
+    // Initial Load
+    renderProducts(menuItems);
+  </script>
+</body>
+</html>
