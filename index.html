@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مطعم ميكسكانو | Mix Cano - المنيو الكامل والطلب المباشر</title>
+  <title>مطعم ميكسكانو | Mix Cano - أشهى بيتزا وكريب وبرجر في بلقاس</title>
   <!-- Google Fonts: Cairo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -38,7 +38,7 @@
     header {
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: white;
-      padding: 14px 16px;
+      padding: 12px 16px;
       position: sticky;
       top: 0;
       z-index: 50;
@@ -52,7 +52,7 @@
       align-items: center;
     }
     .logo-area h1 {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 900;
       display: flex;
       align-items: center;
@@ -62,11 +62,10 @@
       font-size: 11px;
       opacity: 0.9;
     }
-    .contact-btn {
+    .user-pill {
       background: rgba(255,255,255,0.2);
       border: 1px solid rgba(255,255,255,0.4);
       color: white;
-      text-decoration: none;
       padding: 6px 12px;
       border-radius: 20px;
       font-size: 12px;
@@ -74,9 +73,10 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      cursor: pointer;
       transition: 0.2s;
     }
-    .contact-btn:hover { background: white; color: var(--primary); }
+    .user-pill:hover { background: white; color: var(--primary); }
 
     /* Container */
     .container {
@@ -85,10 +85,38 @@
       padding: 0 12px;
     }
 
+    /* Welcome Banner for logged-in user */
+    .welcome-card {
+      background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+      border: 1.5px solid #FDE68A;
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeIn 0.4s ease;
+    }
+    .welcome-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #92400E;
+    }
+    .edit-profile-btn {
+      background: white;
+      border: 1px solid #D97706;
+      color: #B45309;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
     /* Hero Banner */
     .hero-banner {
       background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80') center/cover;
-      height: 130px;
+      height: 125px;
       border-radius: 16px;
       position: relative;
       overflow: hidden;
@@ -459,18 +487,76 @@
       font-weight: bold;
     }
 
-    /* Forms */
-    .form-group { margin-bottom: 10px; }
-    .form-group label { display: block; font-weight: 700; font-size: 12px; margin-bottom: 4px; }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-size: 13px;
-      outline: none;
+    /* Saved User Fast Card (NON-BORING!) */
+    .saved-user-card {
+      background: #F0FDF4;
+      border: 1.5px solid #BBF7D0;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
     }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
+    .saved-user-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .saved-badge {
+      background: #DCFCE7;
+      color: #166534;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 8px;
+    }
+    .change-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .saved-user-info {
+      font-size: 13px;
+      color: #1E293B;
+      line-height: 1.6;
+    }
+
+    /* Fun Interactive Forms */
+    .fun-input-group {
+      background: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+    .fun-input-group:focus-within {
+      border-color: var(--primary);
+      background: #FFF;
+      box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+    }
+    .fun-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #475569;
+      margin-bottom: 4px;
+    }
+    .fun-input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
     .alert-box {
       background: #FEF3C7;
       color: #92400E;
@@ -488,8 +574,8 @@
       background: var(--primary);
       color: white;
       border: none;
-      padding: 12px;
-      border-radius: 12px;
+      padding: 13px;
+      border-radius: 14px;
       font-weight: 900;
       font-size: 15px;
       cursor: pointer;
@@ -498,8 +584,15 @@
       align-items: center;
       gap: 8px;
       box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+      transition: 0.2s;
     }
+    .submit-order-btn:hover { background: var(--primary-dark); }
     .submit-order-btn:disabled { background: #9CA3AF; cursor: not-allowed; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -511,18 +604,27 @@
         <h1>🍕 ميكسكانو | MIX CANO</h1>
         <p>بلقاس - شارع المحكمة القديم | 01002066323</p>
       </div>
-      <a href="tel:01002066323" class="contact-btn">
-        <i class="fa-solid fa-phone"></i> اتصال بالمطعم
-      </a>
+      <div id="headerUserArea">
+        <!-- Injected: either 'تسجيل بياناتي' or 'أهلاً يا...' -->
+      </div>
     </div>
   </header>
 
   <div class="container">
+    <!-- Welcome Back Card if saved user exists -->
+    <div id="welcomeUserCard" style="display: none;" class="welcome-card">
+      <div class="welcome-text">
+        <i class="fa-solid fa-sparkles" style="color: #D97706;"></i>
+        أهلاً بيك من جديد يا <b id="welcomeUserName"></b>! طلبك محفوظ وسريع ⚡
+      </div>
+      <button class="edit-profile-btn" onclick="openProfileModal()">تعديل العنوان ✏️</button>
+    </div>
+
     <!-- Hero Banner -->
     <div class="hero-banner">
       <div class="hero-overlay">
         <h2>مطعم ميكسكانو - بلقاس 🍔</h2>
-        <p>اختر المقاس وحشو الأطراف والصوصات براحتك • خامات أصلية 100%</p>
+        <p>أطلب بضغطة واحدة بدون تكرار كتابة بياناتك • خامات أصلية 100%</p>
       </div>
     </div>
 
@@ -532,7 +634,7 @@
       <input type="text" id="searchInput" placeholder="ابحث في منيو ميكسكانو (مثال: رانش، زنجر، كونو، شاورما...)" oninput="handleSearch()">
     </div>
 
-    <!-- Category Tabs with counts -->
+    <!-- Category Tabs -->
     <div class="categories-tabs" id="categoriesBar">
       <button class="tab-btn active" onclick="filterCategory('all', this)">
         <span><i class="fa-solid fa-utensils"></i> كل المنيو</span>
@@ -658,32 +760,87 @@
         <span style="color: var(--primary);" id="modalTotal">0 ج.م</span>
       </div>
 
-      <!-- Customer Form -->
+      <!-- Customer Checkout Area (Smart: Switch between Saved Card or Interactive Form) -->
       <form id="orderForm" onsubmit="handleSendOrder(event)">
-        <div class="form-group">
-          <label>الاسم بالكامل *</label>
-          <input type="text" id="custName" required placeholder="أدخل اسمك الكريم">
+
+        <!-- Scenario A: Saved Customer (One-Tap Checkout!) -->
+        <div id="savedCustomerView" style="display: none;">
+          <div class="saved-user-card">
+            <div class="saved-user-header">
+              <span class="saved-badge"><i class="fa-solid fa-bolt"></i> عميل مميز - توصيل سريع</span>
+              <button type="button" class="change-btn" onclick="switchToEditForm()">تعديل العنوان أو الرقم ✏️</button>
+            </div>
+            <div class="saved-user-info">
+              <div>👤 <b>الاسم:</b> <span id="savedNameDisplay"></span></div>
+              <div>📞 <b>الهاتف:</b> <span id="savedPhoneDisplay"></span></div>
+              <div>📍 <b>العنوان:</b> <span id="savedAddressDisplay"></span></div>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label>رقم الهاتف للتأكيد (واتساب) *</label>
-          <input type="tel" id="custPhone" required placeholder="010xxxxxxxx">
+
+        <!-- Scenario B: First-time or Editing Form (Interactive & Fun!) -->
+        <div id="newCustomerView">
+          <div style="font-size: 13px; font-weight: 800; margin-bottom: 8px; color: #334155;">
+            <i class="fa-solid fa-truck-fast" style="color: var(--primary);"></i> بيانات التوصيل (تُحفظ تلقائياً):
+          </div>
+
+          <div class="fun-input-group">
+            <div class="fun-label"><i class="fa-solid fa-user" style="color: var(--primary);"></i> اسم صاحب الأوردر اللذيذ:</div>
+            <input type="text" id="custName" class="fun-input" required placeholder="مثال: أحمد محمد">
+          </div>
+
+          <div class="fun-input-group">
+            <div class="fun-label"><i class="fa-solid fa-phone" style="color: #10B981;"></i> رقم تليفونك للاتصال والواتساب:</div>
+            <input type="tel" id="custPhone" class="fun-input" required placeholder="010xxxxxxxx">
+          </div>
+
+          <div class="fun-input-group">
+            <div class="fun-label"><i class="fa-solid fa-location-dot" style="color: #EF4444;"></i> عنوانك في بلقاس بالتفصيل:</div>
+            <input type="text" id="custAddress" class="fun-input" required placeholder="اسم الشارع، رقم البيت أو العمارة، علامة مميزة">
+          </div>
         </div>
-        <div class="form-group">
-          <label>العنوان في بلقاس بالتفصيل *</label>
-          <input type="text" id="custAddress" required placeholder="اسم الشارع، رقم البيت/العمارة، علامة مميزة">
-        </div>
-        <div class="form-group">
-          <label>ملاحظات إضافية على الأكل (اختياري)</label>
-          <textarea id="custNotes" rows="2" placeholder="أي إضافات مثل بدون بصل، زيادة كاتشب..."></textarea>
+
+        <!-- Extra Notes (always available) -->
+        <div class="fun-input-group">
+          <div class="fun-label"><i class="fa-solid fa-pen-fancy" style="color: #8B5CF6;"></i> ملاحظات إضافية على الأكل (اختياري):</div>
+          <input type="text" id="custNotes" class="fun-input" placeholder="مثل: بدون بصل، صوص زيادة، توصيل حار...">
         </div>
 
         <div class="alert-box">
           <i class="fa-solid fa-phone-volume" style="font-size: 20px;"></i>
-          <div><b>تأكيد الطلب والدفع:</b> سيتصل بك مسؤول المطعم فوراً لتأكيد طلبك وتحديد طريقة الدفع التي تناسبك (كاش عند الاستلام أو فودافون كاش).</div>
+          <div><b>تأكيد الطلب:</b> سيتصل بك مسؤول المطعم فوراً لتأكيد الأصناف والعنوان وتحديد طريقة الدفع (كاش أو فودافون كاش).</div>
         </div>
 
         <button type="submit" class="submit-order-btn" id="submitBtn">
-          <span>إرسال الطلب لمطبخ ميكسكانو 🚀</span>
+          <span>إرسال الطلب لمطبخ ميكسكانو الآن 🚀</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Profile Edit Modal -->
+  <div class="modal-overlay" id="profileModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 800;"><i class="fa-solid fa-id-card" style="color: var(--primary);"></i> تعديل بياناتك المحفوظة</h3>
+        <button class="close-modal" onclick="closeProfileModal()">&times;</button>
+      </div>
+
+      <form onsubmit="saveProfileFromModal(event)">
+        <div class="fun-input-group">
+          <div class="fun-label">اسمك:</div>
+          <input type="text" id="profName" class="fun-input" required>
+        </div>
+        <div class="fun-input-group">
+          <div class="fun-label">رقم الهاتف:</div>
+          <input type="tel" id="profPhone" class="fun-input" required>
+        </div>
+        <div class="fun-input-group">
+          <div class="fun-label">العنوان في بلقاس:</div>
+          <input type="text" id="profAddress" class="fun-input" required>
+        </div>
+        <button type="submit" class="submit-order-btn" style="margin-top: 10px;">
+          <i class="fa-solid fa-check"></i> حفظ التعديلات
         </button>
       </form>
     </div>
@@ -730,7 +887,7 @@
       { name: "اكسترا كرانشي مقرمش", price: 30 }
     ];
 
-    // Complete Database (79 Authentic Items with exact Sizes & Prices)
+    // Complete Database (79 Items)
     const menuItems = [
       // ==================== البيتزا الإيطالي (18 صنف) ====================
       { id: 1, name: "بيتزا مرجريتا", cat: "pizza", desc: "صلصة طماطم إيطالية خاصة، جبنة موتزاريلا غنية وريحان طازج", tag: "", sizes: [{ label: "وسط", price: 150 }, { label: "كبير", price: 180 }] },
@@ -739,7 +896,7 @@
       { id: 4, name: "بيتزا شاورما فراخ", cat: "pizza", desc: "شاورما دجاج متبلة بخلطة مسكانو الأصلية، طماطم وفلفل ألوان", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
       { id: 5, name: "بيتزا شيش طاووق", cat: "pizza", desc: "مكعبات شيش طاووق مشوي على الجريل مع بصل مكرمل وفلفل", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
       { id: 6, name: "بيتزا ميكس تشيكن", cat: "pizza", desc: "دجاج كرسبي مقرمش + شيش طاووق + شاورما دجاج مميزة", tag: "سبيشال", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
-      { id: 7, name: "بيتزا تشكن رانش", cat: "pizza", desc: "دجاج مقرمش مع صصوص الرانش الغني، فلفل أخضر وزيتون وموتزاريلا", tag: "الأعلى تقييماً", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+      { id: 7, name: "بيتزا تشكن رانش", cat: "pizza", desc: "دجاج مقرمش مع صوص الرانش الغني، فلفل أخضر وزيتون وموتزاريلا", tag: "الأعلى تقييماً", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
       { id: 8, name: "بيتزا تشكن باربيكيو", cat: "pizza", desc: "دجاج متبل بصوص الباربيكيو المدخن وموتزاريلا وبصل مقرمش", tag: "", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
       { id: 9, name: "بيتزا استربس رانش", cat: "pizza", desc: "قطع استربس دجاج ذهبي مقرمش مع شلال من صوص الرانش اللذيذ", tag: "قنبلة", sizes: [{ label: "وسط", price: 200 }, { label: "كبير", price: 230 }] },
       { id: 10, name: "بيتزا سوبريم دجاج", cat: "pizza", desc: "قطع دجاج، مشروم طازج، فلفل ألوان، زيتون أسود وموتزاريلا", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
@@ -826,10 +983,82 @@
       { id: 79, name: "وجبة ميكس سي فود", cat: "seafood", desc: "طبق مشكل فاخر (جمبري + سبيط + فيليه سمك) مشوي أو مقلي", tag: "سبيشال", sizes: [{ label: "وجبة عادية", price: 240 }, { label: "وجبة دبل بحري", price: 320 }] }
     ];
 
-    // Selected size cache per product card: { [productId]: sizeIndex }
-    const selectedSizeMap = {};
+    // User Profile in localStorage
+    const STORAGE_KEY = "mixcano_customer_profile";
+    let customerProfile = null;
 
-    // Cart state
+    function loadCustomerProfile() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          customerProfile = JSON.parse(saved);
+        }
+      } catch (e) {
+        customerProfile = null;
+      }
+      renderHeaderUser();
+    }
+
+    function saveCustomerProfile(name, phone, address) {
+      customerProfile = { name, phone, address };
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(customerProfile));
+      } catch (e) {}
+      renderHeaderUser();
+    }
+
+    function renderHeaderUser() {
+      const headerArea = document.getElementById("headerUserArea");
+      const welcomeCard = document.getElementById("welcomeUserCard");
+
+      if (customerProfile && customerProfile.name) {
+        headerArea.innerHTML = `
+          <div class="user-pill" onclick="openProfileModal()">
+            <i class="fa-solid fa-user-check" style="color: #4ADE80;"></i>
+            <span>أهلاً، ${customerProfile.name.split(" ")[0]}</span>
+            <i class="fa-solid fa-gear" style="font-size: 10px; opacity: 0.8;"></i>
+          </div>
+        `;
+        welcomeCard.style.display = "flex";
+        document.getElementById("welcomeUserName").innerText = customerProfile.name;
+      } else {
+        headerArea.innerHTML = `
+          <div class="user-pill" onclick="openProfileModal()">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>تسجيل سريع</span>
+          </div>
+        `;
+        welcomeCard.style.display = "none";
+      }
+    }
+
+    function openProfileModal() {
+      if (customerProfile) {
+        document.getElementById("profName").value = customerProfile.name || "";
+        document.getElementById("profPhone").value = customerProfile.phone || "";
+        document.getElementById("profAddress").value = customerProfile.address || "";
+      }
+      document.getElementById("profileModal").style.display = "flex";
+    }
+
+    function closeProfileModal() {
+      document.getElementById("profileModal").style.display = "none";
+    }
+
+    function saveProfileFromModal(e) {
+      e.preventDefault();
+      const n = document.getElementById("profName").value.trim();
+      const p = document.getElementById("profPhone").value.trim();
+      const a = document.getElementById("profAddress").value.trim();
+      if (!n || !p || !a) return;
+
+      saveCustomerProfile(n, p, a);
+      closeProfileModal();
+      syncCheckoutInputs();
+    }
+
+    // Size cache per product card
+    const selectedSizeMap = {};
     let cart = [];
     let currentCategory = 'all';
 
@@ -850,7 +1079,7 @@
       'seafood': 'السي فود والجمبري'
     };
 
-    // Render Product Cards
+    // Render Products Grid
     function renderProducts(items) {
       const container = document.getElementById("productsContainer");
       if (items.length === 0) {
@@ -907,7 +1136,6 @@
       }).join("");
     }
 
-    // Direct switch of size on the card
     function onCardSelectSize(productId, sizeIdx) {
       selectedSizeMap[productId] = sizeIdx;
       const item = menuItems.find(p => p.id === productId);
@@ -925,7 +1153,6 @@
       if (priceEl) priceEl.innerText = `${item.sizes[sizeIdx].price} ج.م`;
     }
 
-    // Quick add to cart using the currently selected size on card
     function quickAddToCart(productId) {
       const item = menuItems.find(p => p.id === productId);
       if (!item) return;
@@ -935,7 +1162,6 @@
       addToCartDetailed(item, sizeObj.label, sizeObj.price, null, []);
     }
 
-    // Open Customization Modal
     function openCustomizeModal(productId) {
       customizingItem = menuItems.find(p => p.id === productId);
       if (!customizingItem) return;
@@ -947,7 +1173,6 @@
       document.getElementById("customItemName").innerText = customizingItem.name;
       document.getElementById("customItemDesc").innerText = customizingItem.desc;
 
-      // Sizes List
       const sizeList = document.getElementById("sizeOptionsList");
       sizeList.innerHTML = customizingItem.sizes.map((s, idx) => `
         <label class="option-row ${idx === modalSelectedSizeIdx ? 'selected' : ''}" onclick="onModalSizeChange(${idx})">
@@ -959,7 +1184,6 @@
         </label>
       `).join("");
 
-      // Pizza Crust List
       const crustSection = document.getElementById("crustSection");
       if (customizingItem.cat === 'pizza') {
         crustSection.style.display = "block";
@@ -977,7 +1201,6 @@
         crustSection.style.display = "none";
       }
 
-      // Addons List
       const addonsList = document.getElementById("addonOptionsList");
       addonsList.innerHTML = generalAddons.map((a, idx) => `
         <label class="option-row" id="addon-row-${idx}" onclick="toggleModalAddon(${idx}, this)">
@@ -1038,15 +1261,12 @@
     function updateModalPrice() {
       if (!customizingItem) return;
       let total = customizingItem.sizes[modalSelectedSizeIdx].price;
-
       if (customizingItem.cat === 'pizza') {
         total += pizzaCrustOptions[modalSelectedCrustIdx].price;
       }
-
       modalSelectedAddons.forEach(idx => {
         total += generalAddons[idx].price;
       });
-
       document.getElementById("customItemPrice").innerText = `${total} ج.م`;
     }
 
@@ -1070,9 +1290,7 @@
       closeCustomizeModal();
     }
 
-    // Add Detailed Item to Cart
     function addToCartDetailed(item, sizeLabel, unitPrice, crustName, addonsList) {
-      // Unique key for exact configuration
       const configKey = `${item.id}|${sizeLabel}|${crustName || ''}|${addonsList.join(',')}`;
       const existing = cart.find(c => c.configKey === configKey);
 
@@ -1147,6 +1365,43 @@
           </div>
         </div>
       `).join("");
+
+      syncCheckoutInputs();
+    }
+
+    function syncCheckoutInputs() {
+      const savedView = document.getElementById("savedCustomerView");
+      const newView = document.getElementById("newCustomerView");
+
+      if (customerProfile && customerProfile.name && customerProfile.phone && customerProfile.address) {
+        savedView.style.display = "block";
+        newView.style.display = "none";
+        document.getElementById("savedNameDisplay").innerText = customerProfile.name;
+        document.getElementById("savedPhoneDisplay").innerText = customerProfile.phone;
+        document.getElementById("savedAddressDisplay").innerText = customerProfile.address;
+
+        document.getElementById("custName").value = customerProfile.name;
+        document.getElementById("custPhone").value = customerProfile.phone;
+        document.getElementById("custAddress").value = customerProfile.address;
+        document.getElementById("custName").required = false;
+        document.getElementById("custPhone").required = false;
+        document.getElementById("custAddress").required = false;
+      } else {
+        savedView.style.display = "none";
+        newView.style.display = "block";
+        document.getElementById("custName").required = true;
+        document.getElementById("custPhone").required = true;
+        document.getElementById("custAddress").required = true;
+      }
+    }
+
+    function switchToEditForm() {
+      document.getElementById("savedCustomerView").style.display = "none";
+      const newView = document.getElementById("newCustomerView");
+      newView.style.display = "block";
+      document.getElementById("custName").required = true;
+      document.getElementById("custPhone").required = true;
+      document.getElementById("custAddress").required = true;
     }
 
     function openCartModal() {
@@ -1158,7 +1413,6 @@
       document.getElementById("cartModal").style.display = "none";
     }
 
-    // Filter categories
     function filterCategory(cat, btn) {
       currentCategory = cat;
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -1171,7 +1425,6 @@
       renderProducts(filtered);
     }
 
-    // Search bar
     function handleSearch() {
       const query = document.getElementById("searchInput").value.trim().toLowerCase();
       if (!query) {
@@ -1188,19 +1441,35 @@
       renderProducts(results);
     }
 
-    // Send Order to Telegram Bot
+    // Send Order to Telegram
     async function handleSendOrder(e) {
       e.preventDefault();
       if (cart.length === 0) return;
+
+      let name = document.getElementById("custName").value.trim();
+      let phone = document.getElementById("custPhone").value.trim();
+      let address = document.getElementById("custAddress").value.trim();
+      const notes = document.getElementById("custNotes").value.trim();
+
+      if (customerProfile && (!name || !phone || !address)) {
+        name = customerProfile.name;
+        phone = customerProfile.phone;
+        address = customerProfile.address;
+      }
+
+      if (!name || !phone || !address) {
+        alert("يرجى كتابة الاسم ورقم الهاتف والعنوان بالتفصيل");
+        switchToEditForm();
+        return;
+      }
+
+      // Auto-save user profile for all future orders!
+      saveCustomerProfile(name, phone, address);
 
       const submitBtn = document.getElementById("submitBtn");
       submitBtn.disabled = true;
       submitBtn.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> جاري إرسال الطلب لميكسكانو...";
 
-      const name = document.getElementById("custName").value.trim();
-      const phone = document.getElementById("custPhone").value.trim();
-      const address = document.getElementById("custAddress").value.trim();
-      const notes = document.getElementById("custNotes").value.trim();
       const total = cart.reduce((sum, item) => sum + (item.unitPrice * item.qty), 0);
       const orderCode = Math.floor(1000 + Math.random() * 9000);
 
@@ -1255,8 +1524,9 @@ ${notes ? `📝 <b>ملاحظات العميل:</b> ${notes}\n` : ""}━━━�
       }
     }
 
-    // Initial Load
+    // Startup
+    loadCustomerProfile();
     renderProducts(menuItems);
   </script>
 </body>
-</html>
+        </html>
