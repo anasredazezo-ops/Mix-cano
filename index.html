@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مطعم ميكسكانو | Mix Cano - أشهى بيتزا وكريب وبرجر في بلقاس</title>
+  <title>مطعم ميكسكانو | Mix Cano - المنيو الرسمي والطلب أونلاين</title>
   <!-- Google Fonts: Cairo -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -33,7 +33,41 @@
       background-color: var(--light);
       color: var(--dark);
       padding-bottom: 95px;
+      overflow-x: hidden;
     }
+
+    /* Cinematic Smooth Animations */
+    @keyframes slideFromRight {
+      0% {
+        opacity: 0;
+        transform: translateX(40px) scale(0.97);
+      }
+      70% {
+        transform: translateX(-4px) scale(1.01);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes slideLeftToRight {
+      0% {
+        transform: translateX(60px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulseCard {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
     /* Header */
     header {
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
@@ -85,7 +119,7 @@
       padding: 0 12px;
     }
 
-    /* Welcome Banner for logged-in user */
+    /* Welcome Banner */
     .welcome-card {
       background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
       border: 1.5px solid #FDE68A;
@@ -95,7 +129,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      animation: fadeIn 0.4s ease;
+      animation: slideFromRight 0.5s ease-out forwards;
     }
     .welcome-text {
       font-size: 13px;
@@ -113,7 +147,7 @@
       cursor: pointer;
     }
 
-    /* Hero Banner */
+    /* Hero Banner with Glaze */
     .hero-banner {
       background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80') center/cover;
       height: 125px;
@@ -124,6 +158,7 @@
       display: flex;
       align-items: flex-end;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: slideLeftToRight 0.6s ease-out;
     }
     .hero-overlay {
       background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
@@ -134,21 +169,26 @@
     .hero-overlay h2 { font-size: 17px; font-weight: 900; }
     .hero-overlay p { font-size: 11px; color: var(--secondary); font-weight: bold; }
 
-    /* Search Bar */
+    /* Search Box */
     .search-box {
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       position: relative;
+      animation: slideFromRight 0.6s ease-out;
     }
     .search-box input {
       width: 100%;
-      padding: 10px 38px 10px 14px;
+      padding: 11px 40px 11px 14px;
       border-radius: 14px;
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       font-size: 13px;
       outline: none;
       box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      transition: 0.2s;
     }
-    .search-box input:focus { border-color: var(--primary); }
+    .search-box input:focus { 
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+    }
     .search-box i {
       position: absolute;
       right: 14px;
@@ -156,14 +196,23 @@
       transform: translateY(-50%);
       color: var(--text-muted);
     }
+    .smart-search-hint {
+      font-size: 11px;
+      color: #71717A;
+      margin: 2px 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 
-    /* Categories Tabs */
+    /* Categories Horizontal Scroll with smooth snap */
     .categories-tabs {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 8px;
       scrollbar-width: none;
+      scroll-behavior: smooth;
     }
     .categories-tabs::-webkit-scrollbar { display: none; }
     .tab-btn {
@@ -180,7 +229,10 @@
       flex-direction: column;
       align-items: center;
       gap: 2px;
-      transition: all 0.2s;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .tab-btn:active {
+      transform: scale(0.92);
     }
     .tab-btn .badge-count {
       font-size: 10px;
@@ -194,7 +246,8 @@
       background: var(--primary);
       color: white;
       border-color: var(--primary);
-      box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.35);
+      transform: translateY(-2px);
     }
     .tab-btn.active .badge-count {
       background: rgba(255,255,255,0.25);
@@ -225,6 +278,8 @@
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 12px;
     }
+
+    /* Animated Card Slide From Right */
     .product-card {
       background: var(--surface);
       border-radius: 14px;
@@ -233,10 +288,15 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.15s, box-shadow 0.15s;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: slideFromRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
     }
     .product-card:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .product-card:active {
+      transform: scale(0.98);
     }
     .card-top {
       display: flex;
@@ -265,7 +325,7 @@
       margin-bottom: 10px;
     }
 
-    /* Size selector pills inside card */
+    /* Size selector pills */
     .card-sizes-selector {
       display: flex;
       gap: 6px;
@@ -284,12 +344,13 @@
       border-radius: 8px;
       cursor: pointer;
       color: #4B5563;
-      transition: 0.2s;
+      transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .size-pill.selected {
       background: var(--primary);
       color: white;
       box-shadow: 0 2px 6px rgba(211, 47, 47, 0.25);
+      transform: scale(1.03);
     }
 
     .product-footer {
@@ -319,7 +380,10 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      transition: 0.2s;
+      transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .btn-action:active {
+      transform: scale(0.92);
     }
     .btn-customize {
       background: #FFF1F2;
@@ -354,6 +418,7 @@
       overflow-y: auto;
       padding: 20px;
       position: relative;
+      animation: slideFromRight 0.35s ease-out;
     }
     .modal-header {
       display: flex;
@@ -432,7 +497,7 @@
       cursor: pointer;
       z-index: 100;
       transform: translateY(120px);
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .cart-bar.show { transform: translateY(0); }
     .cart-bar-info { display: flex; align-items: center; gap: 12px; }
@@ -487,13 +552,14 @@
       font-weight: bold;
     }
 
-    /* Saved User Fast Card (NON-BORING!) */
+    /* Saved User Fast Card */
     .saved-user-card {
       background: #F0FDF4;
       border: 1.5px solid #BBF7D0;
       border-radius: 14px;
       padding: 14px;
       margin-bottom: 14px;
+      animation: slideFromRight 0.3s ease-out;
     }
     .saved-user-header {
       display: flex;
@@ -524,7 +590,7 @@
       line-height: 1.6;
     }
 
-    /* Fun Interactive Forms */
+    /* Forms */
     .fun-input-group {
       background: #F8FAFC;
       border: 1.5px solid #E2E8F0;
@@ -588,11 +654,6 @@
     }
     .submit-order-btn:hover { background: var(--primary-dark); }
     .submit-order-btn:disabled { background: #9CA3AF; cursor: not-allowed; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
@@ -604,18 +665,16 @@
         <h1>🍕 ميكسكانو | MIX CANO</h1>
         <p>بلقاس - شارع المحكمة القديم | 01002066323</p>
       </div>
-      <div id="headerUserArea">
-        <!-- Injected: either 'تسجيل بياناتي' or 'أهلاً يا...' -->
-      </div>
+      <div id="headerUserArea"></div>
     </div>
   </header>
 
   <div class="container">
-    <!-- Welcome Back Card if saved user exists -->
+    <!-- Welcome Back Card -->
     <div id="welcomeUserCard" style="display: none;" class="welcome-card">
       <div class="welcome-text">
         <i class="fa-solid fa-sparkles" style="color: #D97706;"></i>
-        أهلاً بيك من جديد يا <b id="welcomeUserName"></b>! طلبك محفوظ وسريع ⚡
+        أهلاً بيك من جديد يا <b id="welcomeUserName"></b>! طلبك سريع وبضغطة واحدة ⚡
       </div>
       <button class="edit-profile-btn" onclick="openProfileModal()">تعديل العنوان ✏️</button>
     </div>
@@ -624,14 +683,18 @@
     <div class="hero-banner">
       <div class="hero-overlay">
         <h2>مطعم ميكسكانو - بلقاس 🍔</h2>
-        <p>أطلب بضغطة واحدة بدون تكرار كتابة بياناتك • خامات أصلية 100%</p>
+        <p>المنيو الكامل الأصلي • بحث ذكي ضد الأخطاء الإملائية • خامات ممتازة</p>
       </div>
     </div>
 
-    <!-- Search Box -->
+    <!-- Smart Fuzzy Search Box -->
     <div class="search-box">
       <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" id="searchInput" placeholder="ابحث في منيو ميكسكانو (مثال: رانش، زنجر، كونو، شاورما...)" oninput="handleSearch()">
+      <input type="text" id="searchInput" placeholder="ابحث عن أي أكلة (كريب، كيرب، بيتزا، برجر، رانش، شاورما...)" oninput="handleSearch()">
+    </div>
+    <div class="smart-search-hint">
+      <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--secondary);"></i>
+      <span>بحث ذكي متطور: حتى لو كتبت الكلمة بحروف مقلوبة أو ملخبطة (زي "كيرب") هيطلعلك طلبك فوراً!</span>
     </div>
 
     <!-- Category Tabs -->
@@ -649,7 +712,7 @@
         <span class="badge-count">18 صنف</span>
       </button>
       <button class="tab-btn" onclick="filterCategory('cone', this)">
-        <span><i class="fa-solid fa-ice-cream"></i> كونو ميكسكانو</span>
+        <span><i class="fa-solid fa-pepper-hot"></i> كريب كونو</span>
         <span class="badge-count">10 أصناف</span>
       </button>
       <button class="tab-btn" onclick="filterCategory('burger', this)">
@@ -676,10 +739,8 @@
       <span class="count" id="currentCategoryCount">79 صنف متاح</span>
     </div>
 
-    <!-- Products Grid -->
-    <div class="products-grid" id="productsContainer">
-      <!-- Injected by JavaScript -->
-    </div>
+    <!-- Products Grid with Motion Animation -->
+    <div class="products-grid" id="productsContainer"></div>
   </div>
 
   <!-- Bottom Floating Cart Bar -->
@@ -694,7 +755,7 @@
     <button class="cart-bar-btn">معاينة الطلب 🛒</button>
   </div>
 
-  <!-- Customization Modal (Sizes + Crust + Add-ons) -->
+  <!-- Customization Modal (Exact Official Options) -->
   <div class="modal-overlay" id="customizeModal">
     <div class="modal-card">
       <div class="modal-header">
@@ -708,33 +769,61 @@
       <!-- Size Selection -->
       <div id="sizeSection">
         <div class="modal-section-title">
-          <span>اختر الحجم / المقاس المطلوب:</span>
+          <span>الحجم / طريقة التقديم المطلوبة:</span>
           <span style="color: var(--primary); font-size: 11px;">مطلوب</span>
         </div>
         <div class="options-grid" id="sizeOptionsList"></div>
       </div>
 
-      <!-- Crust Selection (For Pizza only) -->
-      <div id="crustSection" style="display: none;">
+      <!-- Pizza Crust (Official) -->
+      <div id="pizzaCrustSection" style="display: none;">
         <div class="modal-section-title">
           <span>حشو الأطراف للبيتزا:</span>
           <span style="color: #6B7280; font-size: 11px;">اختياري</span>
         </div>
-        <div class="options-grid" id="crustOptionsList"></div>
+        <div class="options-grid">
+          <label class="option-row selected" id="crust-none-row" onclick="selectPizzaCrust(false)">
+            <div>
+              <input type="radio" name="pCrust" id="crust-none-check" checked>
+              <span>بدون حشو أطراف (عادي)</span>
+            </div>
+            <span style="font-weight:900;">مجاناً</span>
+          </label>
+          <label class="option-row" id="crust-stuffed-row" onclick="selectPizzaCrust(true)">
+            <div>
+              <input type="radio" name="pCrust" id="crust-stuffed-check">
+              <span>حشو أطراف جبنة موتزاريلا</span>
+            </div>
+            <span style="font-weight:900;" id="crustPriceLabel">+40 ج.م</span>
+          </label>
+        </div>
+
+        <div class="modal-section-title" style="margin-top: 10px;">
+          <span>إكسترا جبن:</span>
+        </div>
+        <div class="options-grid">
+          <label class="option-row" id="pizzaExtraCheeseRow" onclick="togglePizzaExtraCheese()">
+            <div>
+              <input type="checkbox" id="pizzaExtraCheeseCheck">
+              <span>إكسترا جبنة موتزاريلا</span>
+            </div>
+            <span style="font-weight:900;">+25 ج.م</span>
+          </label>
+        </div>
       </div>
 
-      <!-- Add-ons & Sauces -->
-      <div id="addonsSection">
+      <!-- Authentic Sauces from Menu -->
+      <div id="officialSaucesSection">
         <div class="modal-section-title">
-          <span>إضافات وصوصات جانبية:</span>
+          <span>إضافة صوص جانبي (من المنيو):</span>
           <span style="color: #6B7280; font-size: 11px;">اختياري</span>
         </div>
-        <div class="options-grid" id="addonOptionsList"></div>
+        <div class="options-grid" id="officialSaucesList"></div>
       </div>
 
-      <!-- Live Calculated Price for this Item -->
+      <!-- Live Calculated Price -->
       <div style="display: flex; justify-content: space-between; align-items: center; background: #F3F4F6; padding: 12px; border-radius: 12px; margin: 16px 0 12px;">
-        <span style="font-weight: 800; font-size: 14px;">سعر الوجبة بالإضافات:</span>
+        <span style="font-weight: 800; font-size: 14px;">سعر الوجبة:</span>
         <span style="color: var(--primary); font-weight: 900; font-size: 18px;" id="customItemPrice">0 ج.م</span>
       </div>
 
@@ -760,10 +849,9 @@
         <span style="color: var(--primary);" id="modalTotal">0 ج.م</span>
       </div>
 
-      <!-- Customer Checkout Area (Smart: Switch between Saved Card or Interactive Form) -->
+      <!-- Customer Form -->
       <form id="orderForm" onsubmit="handleSendOrder(event)">
-
-        <!-- Scenario A: Saved Customer (One-Tap Checkout!) -->
+        <!-- Saved User Quick View -->
         <div id="savedCustomerView" style="display: none;">
           <div class="saved-user-card">
             <div class="saved-user-header">
@@ -778,37 +866,37 @@
           </div>
         </div>
 
-        <!-- Scenario B: First-time or Editing Form (Interactive & Fun!) -->
+        <!-- First time view -->
         <div id="newCustomerView">
           <div style="font-size: 13px; font-weight: 800; margin-bottom: 8px; color: #334155;">
-            <i class="fa-solid fa-truck-fast" style="color: var(--primary);"></i> بيانات التوصيل (تُحفظ تلقائياً):
+            <i class="fa-solid fa-truck-fast" style="color: var(--primary);"></i> بيانات التوصيل (تُحفظ تلقائياً للمرات القادمة):
           </div>
 
           <div class="fun-input-group">
-            <div class="fun-label"><i class="fa-solid fa-user" style="color: var(--primary);"></i> اسم صاحب الأوردر اللذيذ:</div>
+            <div class="fun-label"><i class="fa-solid fa-user" style="color: var(--primary);"></i> اسم حضرتك:</div>
             <input type="text" id="custName" class="fun-input" required placeholder="مثال: أحمد محمد">
           </div>
 
           <div class="fun-input-group">
-            <div class="fun-label"><i class="fa-solid fa-phone" style="color: #10B981;"></i> رقم تليفونك للاتصال والواتساب:</div>
+            <div class="fun-label"><i class="fa-solid fa-phone" style="color: #10B981;"></i> رقم التليفون (للاتصال والواتساب):</div>
             <input type="tel" id="custPhone" class="fun-input" required placeholder="010xxxxxxxx">
           </div>
 
           <div class="fun-input-group">
-            <div class="fun-label"><i class="fa-solid fa-location-dot" style="color: #EF4444;"></i> عنوانك في بلقاس بالتفصيل:</div>
+            <div class="fun-label"><i class="fa-solid fa-location-dot" style="color: #EF4444;"></i> العنوان في بلقاس بالتفصيل:</div>
             <input type="text" id="custAddress" class="fun-input" required placeholder="اسم الشارع، رقم البيت أو العمارة، علامة مميزة">
           </div>
         </div>
 
-        <!-- Extra Notes (always available) -->
+        <!-- Extra Notes -->
         <div class="fun-input-group">
           <div class="fun-label"><i class="fa-solid fa-pen-fancy" style="color: #8B5CF6;"></i> ملاحظات إضافية على الأكل (اختياري):</div>
-          <input type="text" id="custNotes" class="fun-input" placeholder="مثل: بدون بصل، صوص زيادة، توصيل حار...">
+          <input type="text" id="custNotes" class="fun-input" placeholder="مثل: بدون بصل، صوص زيادة، تحمير زيادة...">
         </div>
 
         <div class="alert-box">
           <i class="fa-solid fa-phone-volume" style="font-size: 20px;"></i>
-          <div><b>تأكيد الطلب:</b> سيتصل بك مسؤول المطعم فوراً لتأكيد الأصناف والعنوان وتحديد طريقة الدفع (كاش أو فودافون كاش).</div>
+          <div><b>تأكيد الطلب:</b> سيتصل بك مسؤول المطعم فوراً لتأكيد الأصناف وتحديد طريقة الدفع (كاش عند الاستلام أو فودافون كاش).</div>
         </div>
 
         <button type="submit" class="submit-order-btn" id="submitBtn">
@@ -867,35 +955,23 @@
     const TELEGRAM_BOT_TOKEN = "8782336534:AAFnXu1gXMnSnVYuSrNBdzbo9-rGll78HU8";
     const TELEGRAM_CHAT_ID = "7469041086";
 
-    // Pizza Crusts
-    const pizzaCrustOptions = [
-      { name: "بدون حشو أطراف (عادي)", price: 0 },
-      { name: "حشو أطراف جبنة كيري", price: 30 },
-      { name: "حشو أطراف سوسيس", price: 35 },
-      { name: "حشو أطراف جبنة موتزاريلا", price: 30 },
-      { name: "كونو أطراف ميكسكانو", price: 40 }
-    ];
-
-    // General Addons & Sauces
-    const generalAddons = [
-      { name: "اكسترا جبنة موتزاريلا ذائبة", price: 25 },
-      { name: "صوص رانش إضافي", price: 15 },
-      { name: "صوص شيدر سايح", price: 15 },
-      { name: "صوص باربيكيو مدخن", price: 15 },
-      { name: "صوص تايجر حار ناري", price: 20 },
-      { name: "فلفل هالبينو سبايسي", price: 10 },
-      { name: "اكسترا كرانشي مقرمش", price: 30 }
+    // Authentic Sauces from Mix Cano menu
+    const authenticSauces = [
+      { name: "صوص شيدر", price: 10 },
+      { name: "صوص باربيكيو", price: 20 },
+      { name: "صوص تايجر", price: 20 },
+      { name: "صوص ديناميت", price: 30 }
     ];
 
     // Complete Database (79 Items)
     const menuItems = [
-      // ==================== البيتزا الإيطالي (18 صنف) ====================
+      // البيتزا (18)
       { id: 1, name: "بيتزا مرجريتا", cat: "pizza", desc: "صلصة طماطم إيطالية خاصة، جبنة موتزاريلا غنية وريحان طازج", tag: "", sizes: [{ label: "وسط", price: 150 }, { label: "كبير", price: 180 }] },
-      { id: 2, name: "بيتزا ميكس جبن", cat: "pizza", desc: "موتزاريلا، جبنة شيدر أمريكية، جبنة رومي مبشورة، وكيري كريمي", tag: "الأكثر طلباً", sizes: [{ label: "وسط", price: 160 }, { label: "كبير", price: 190 }] },
-      { id: 3, name: "بيتزا اكسترا تشيز", cat: "pizza", desc: "طبقات مضاعفة فائقة من الجبن الموتزاريلا الذائبة الغنية", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 220 }] },
+      { id: 2, name: "بيتزا ميكس جبن", cat: "pizza", desc: "موتزاريلا، جبنة شيدر أمريكية، جبنة رومي مبشورة، وكيري", tag: "الأكثر طلباً", sizes: [{ label: "وسط", price: 160 }, { label: "كبير", price: 190 }] },
+      { id: 3, name: "بيتزا اكسترا تشيز", cat: "pizza", desc: "طبقات مضاعفة فائقة من الجبن الموتزاريلا الذائبة الغنية", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 200 }] },
       { id: 4, name: "بيتزا شاورما فراخ", cat: "pizza", desc: "شاورما دجاج متبلة بخلطة مسكانو الأصلية، طماطم وفلفل ألوان", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
       { id: 5, name: "بيتزا شيش طاووق", cat: "pizza", desc: "مكعبات شيش طاووق مشوي على الجريل مع بصل مكرمل وفلفل", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
-      { id: 6, name: "بيتزا ميكس تشيكن", cat: "pizza", desc: "دجاج كرسبي مقرمش + شيش طاووق + شاورما دجاج مميزة", tag: "سبيشال", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
+      { id: 6, name: "بيتزا ميكس تشيكن", cat: "pizza", desc: "دجاج كرسبي مقرمش + شيش طاووق + شاورما دجاج مميزة", tag: "مميز", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
       { id: 7, name: "بيتزا تشكن رانش", cat: "pizza", desc: "دجاج مقرمش مع صوص الرانش الغني، فلفل أخضر وزيتون وموتزاريلا", tag: "الأعلى تقييماً", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
       { id: 8, name: "بيتزا تشكن باربيكيو", cat: "pizza", desc: "دجاج متبل بصوص الباربيكيو المدخن وموتزاريلا وبصل مقرمش", tag: "", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
       { id: 9, name: "بيتزا استربس رانش", cat: "pizza", desc: "قطع استربس دجاج ذهبي مقرمش مع شلال من صوص الرانش اللذيذ", tag: "قنبلة", sizes: [{ label: "وسط", price: 200 }, { label: "كبير", price: 230 }] },
@@ -909,90 +985,88 @@
       { id: 17, name: "بيتزا بيبروني", cat: "pizza", desc: "شرائح بيبروني بقري مدخن فاخر مع جبنة موتزاريلا وفيرة", tag: "", sizes: [{ label: "وسط", price: 180 }, { label: "كبير", price: 210 }] },
       { id: 18, name: "بيتزا بسطرمة", cat: "pizza", desc: "بسطرمة بلدي منتقاة مع زيتون وفلفل رومي وجبنة موتزاريلا", tag: "", sizes: [{ label: "وسط", price: 190 }, { label: "كبير", price: 220 }] },
 
-      // ==================== الكريبات الحادقة (18 صنف) ====================
-      { id: 19, name: "كريب بانية ناجتس", cat: "crepe", desc: "قطع بانية ناجتس ذهبية مع صوص الجبن والبطاطس", tag: "", sizes: [{ label: "حجم عادي", price: 90 }, { label: "حجم سوبر جامبو", price: 120 }] },
-      { id: 20, name: "كريب كرانشي ناجتس", cat: "crepe", desc: "ناجتس دجاج فائق القرمشة مع فلفل وموتزاريلا سايحة", tag: "", sizes: [{ label: "حجم عادي", price: 100 }, { label: "حجم سوبر جامبو", price: 130 }] },
-      { id: 21, name: "كريب زنجر سوبريم ناجتس", cat: "crepe", desc: "زنجر حار سبايسي مقرمش مع جبنة سايحة وخضروات", tag: "سبايسي", sizes: [{ label: "حجم عادي", price: 100 }, { label: "حجم سوبر جامبو", price: 130 }] },
-      { id: 22, name: "كريب استربس فيلية زنجر", cat: "crepe", desc: "أصابع فيليه استربس زنجر متبلة حارة مع صوص الجبن والموتزاريلا", tag: "الأكثر طلباً", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
-      { id: 23, name: "كريب اكسترا كرانشي", cat: "crepe", desc: "كمية مضاعفة من قطع الكرانشي الذهبية مع ميكس صوصات", tag: "حجم كبير", sizes: [{ label: "حجم عادي", price: 140 }, { label: "حجم سوبر جامبو", price: 170 }] },
-      { id: 24, name: "كريب اكسترا زنجر سوبريم", cat: "crepe", desc: "جرعة مضاعفة من الزنجر السبايسي الفاخر والموتزاريلا", tag: "دبل زنجر", sizes: [{ label: "حجم عادي", price: 140 }, { label: "حجم سوبر جامبو", price: 170 }] },
-      { id: 25, name: "كريب كوردن بلو", cat: "crepe", desc: "رول كوردن بلو محشو جبنة ذائبة ومقلي مقرمش", tag: "", sizes: [{ label: "حجم عادي", price: 120 }, { label: "حجم سوبر جامبو", price: 150 }] },
-      { id: 26, name: "كريب شاورما دجاج MIX", cat: "crepe", desc: "شاورما دجاج متبلة مع صوص الثومية والموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 120 }, { label: "حجم سوبر جامبو", price: 150 }] },
-      { id: 27, name: "كريب شيش طاووق MIX", cat: "crepe", desc: "قطع شيش طاووق مشوي غض مع فلفل وموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 120 }, { label: "حجم سوبر جامبو", price: 150 }] },
-      { id: 28, name: "كريب فاهيتا", cat: "crepe", desc: "دجاج فاهيتا مكسيكي مع بصل وفلفل ألوان وصوص تايجر", tag: "", sizes: [{ label: "حجم عادي", price: 120 }, { label: "حجم سوبر جامبو", price: 150 }] },
-      { id: 29, name: "كريب شيش تندوري", cat: "crepe", desc: "شيش طاووق متبل ببهارات التندوري الهندية الشهية", tag: "", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
-      { id: 30, name: "كريب فيلية صدور تندوري", cat: "crepe", desc: "صدور دجاج فيليه طرية بتتبيلة التندوري الغنية", tag: "", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
-      { id: 31, name: "كريب اسكالوب بانية", cat: "crepe", desc: "شرائح اسكالوب بانية متبلة ومقرمشة مع جبنة ومخلل", tag: "", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
-      { id: 32, name: "كريب شاورما لحمة", cat: "crepe", desc: "شاورما لحم بلدي طازجة مع بقدونس وطماطم وموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 140 }, { label: "حجم سوبر جامبو", price: 170 }] },
-      { id: 33, name: "كريب كفتة مشوي", cat: "crepe", desc: "كفتة لحم مشوية على الفحم مع صوص طحينة وموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 130 }, { label: "حجم سوبر جامبو", price: 160 }] },
-      { id: 34, name: "كريب هوت دوج MIX", cat: "crepe", desc: "قطع هوت دوج مشوية مع خلطة خضروات وموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 110 }, { label: "حجم سوبر جامبو", price: 140 }] },
-      { id: 35, name: "كريب ميكس جبن", cat: "crepe", desc: "تشكيلة من الجبن الرومي والشيدر والموتزاريلا الغنية", tag: "", sizes: [{ label: "حجم عادي", price: 80 }, { label: "حجم سوبر جامبو", price: 110 }] },
-      { id: 36, name: "كريب تشيز بطاطس", cat: "crepe", desc: "بطاطس مقرمشة ذهبية مع صوص الجبن الشيدر والموتزاريلا", tag: "", sizes: [{ label: "حجم عادي", price: 80 }, { label: "حجم سوبر جامبو", price: 110 }] },
+      // الكريبات (18)
+      { id: 19, name: "كريب بانية ناجتس", cat: "crepe", desc: "قطع بانية ناجتس ذهبية مع صوص الجبن والبطاطس", tag: "", sizes: [{ label: "عادي", price: 90 }, { label: "كريب كونو", price: 120 }] },
+      { id: 20, name: "كريب كرانشي ناجتس", cat: "crepe", desc: "ناجتس دجاج فائق القرمشة مع فلفل وموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 100 }, { label: "كريب كونو", price: 130 }] },
+      { id: 21, name: "كريب زنجر سوبريم ناجتس", cat: "crepe", desc: "زنجر حار سبايسي مقرمش مع جبنة سايحة وخضروات", tag: "سبايسي", sizes: [{ label: "عادي", price: 100 }, { label: "كريب كونو", price: 130 }] },
+      { id: 22, name: "كريب استربس فيلية زنجر", cat: "crepe", desc: "أصابع فيليه استربس زنجر متبلة حارة مع صوص الجبن والموتزاريلا", tag: "الأكثر طلباً", sizes: [{ label: "عادي", price: 130 }, { label: "كريب كونو", price: 150 }] },
+      { id: 23, name: "كريب اكسترا كرانشي", cat: "crepe", desc: "كمية مضاعفة من قطع الكرانشي الذهبية مع ميكس صوصات", tag: "حجم كبير", sizes: [{ label: "عادي", price: 140 }, { label: "كريب كونو", price: 160 }] },
+      { id: 24, name: "كريب اكسترا زنجر سوبريم", cat: "crepe", desc: "جرعة مضاعفة من الزنجر السبايسي الفاخر والموتزاريلا", tag: "دبل زنجر", sizes: [{ label: "عادي", price: 140 }, { label: "كريب كونو", price: 160 }] },
+      { id: 25, name: "كريب كوردن بلو", cat: "crepe", desc: "رول كوردن بلو محشو جبنة ذائبة ومقلي مقرمش", tag: "", sizes: [{ label: "عادي", price: 120 }, { label: "كريب كونو", price: 150 }] },
+      { id: 26, name: "كريب شاورما دجاج MIX", cat: "crepe", desc: "شاورما دجاج متبلة مع صوص الثومية والموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 120 }, { label: "كريب كونو", price: 150 }] },
+      { id: 27, name: "كريب شيش طاووق MIX", cat: "crepe", desc: "قطع شيش طاووق مشوي غض مع فلفل وموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 120 }, { label: "كريب كونو", price: 150 }] },
+      { id: 28, name: "كريب فاهيتا", cat: "crepe", desc: "دجاج فاهيتا مكسيكي مع بصل وفلفل ألوان وصوص تايجر", tag: "", sizes: [{ label: "عادي", price: 120 }, { label: "كريب كونو", price: 150 }] },
+      { id: 29, name: "كريب شيش تندوري", cat: "crepe", desc: "شيش طاووق متبل ببهارات التندوري الهندية الشهية", tag: "", sizes: [{ label: "عادي", price: 130 }, { label: "كريب كونو", price: 160 }] },
+      { id: 30, name: "كريب فيلية صدور تندوري", cat: "crepe", desc: "صدور دجاج فيليه طرية بتتبيلة التندوري الغنية", tag: "", sizes: [{ label: "عادي", price: 130 }, { label: "كريب كونو", price: 160 }] },
+      { id: 31, name: "كريب اسكالوب بانية", cat: "crepe", desc: "شرائح اسكالوب بانية متبلة ومقرمشة مع جبنة ومخلل", tag: "", sizes: [{ label: "عادي", price: 130 }, { label: "كريب كونو", price: 150 }] },
+      { id: 32, name: "كريب شاورما لحمة", cat: "crepe", desc: "شاورما لحم بلدي طازجة مع بقدونس وطماطم وموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 140 }] },
+      { id: 33, name: "كريب كفتة مشوي", cat: "crepe", desc: "كفتة لحم مشوية على الفحم مع صوص طحينة وموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 130 }] },
+      { id: 34, name: "كريب هوت دوج MIX", cat: "crepe", desc: "قطع هوت دوج مشوية مع خلطة خضروات وموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 110 }] },
+      { id: 35, name: "كريب ميكس جبن", cat: "crepe", desc: "تشكيلة من الجبن الرومي والشيدر والموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 80 }] },
+      { id: 36, name: "كريب تشيز بطاطس", cat: "crepe", desc: "بطاطس مقرمشة ذهبية مع صوص الجبن الشيدر والموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 80 }] },
 
-      // ==================== كونو ميكسكانو المميز (10 أصناف) ====================
-      { id: 37, name: "ميكس فراير M4", cat: "cone", desc: "بانية ناجتس - هوت دوج - استربس مقرمش - كوردن بلو مع صوصات وجبن", tag: "M4 سبيشال", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
-      { id: 38, name: "ميكس كانو هوت M7", cat: "cone", desc: "شيش طاووق - استربس - بانية ناجتس - هوت دوج - أصابع موتزاريلا", tag: "الأعلى طلباً", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
-      { id: 39, name: "ميكسكاوي", cat: "cone", desc: "كوردن بلو - استربس - ريستو / رومي - أصابع موتزاريلا سايحة", tag: "", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
-      { id: 40, name: "هوبا تشيكن", cat: "cone", desc: "ريستو / رومي - كوردن - استربس - شيش طاووق - أصابع موتزاريلا غنية", tag: "سوبر دجاج", sizes: [{ label: "عادي", price: 180 }, { label: "دبل حشو جبنة", price: 215 }] },
-      { id: 41, name: "كرانشيتو", cat: "cone", desc: "شيش - استربس كرانشي - ريستو / رومي - أصابع موتزاريلا وصوصات", tag: "", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
-      { id: 42, name: "قنبلة MIX", cat: "cone", desc: "فيلية تندوري هندي - برجر لحم 100 جرام - تشكن كرسبي مقرمش", tag: "قنبلة الميكس", sizes: [{ label: "عادي", price: 180 }, { label: "دبل حشو جبنة", price: 215 }] },
-      { id: 43, name: "تايجر MIX", cat: "cone", desc: "ناشفال حار - شيش تندوري - هوت دوج MIX مع صوص تايجر الناري", tag: "ناري سبايسي", sizes: [{ label: "عادي", price: 180 }, { label: "دبل حشو جبنة", price: 215 }] },
-      { id: 44, name: "فرانسيسكو", cat: "cone", desc: "بانية ناجتس - استربس - صوابع موتزاريلا - بسطرمة بلدي مع صوص الجبن", tag: "", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
-      { id: 45, name: "ميجا ميكس بيف", cat: "cone", desc: "ميكس لحوم فاخرة مطهوة على الجريل مع جبنة شيدر وموتزاريلا", tag: "", sizes: [{ label: "عادي", price: 180 }, { label: "دبل حشو جبنة", price: 215 }] },
-      { id: 46, name: "ميكس كانو كونو الخاص", cat: "cone", desc: "كوردن بلو محشو جبن - شيش طاووق متبل - روست رومي مدخن", tag: "توقيع المحل", sizes: [{ label: "عادي", price: 170 }, { label: "دبل حشو جبنة", price: 205 }] },
+      // كريب كونو (10)
+      { id: 37, name: "ميكس فراير M4", cat: "cone", desc: "بانية ناجتس - هوت دوج - استربس مقرمش - كوردن بلو مع صوصات وجبن", tag: "M4 سبيشال", sizes: [{ label: "وجبة كونو كاملة", price: 170 }] },
+      { id: 38, name: "ميكس كانو هوت M7", cat: "cone", desc: "شيش طاووق - استربس - بانية ناجتس - هوت دوج - أصابع موتزاريلا", tag: "الأعلى طلباً", sizes: [{ label: "وجبة كونو كاملة", price: 170 }] },
+      { id: 39, name: "ميكسكاوي", cat: "cone", desc: "كوردن بلو - استربس - ريستو / رومي - أصابع موتزاريلا سايحة", tag: "", sizes: [{ label: "وجبة كونو كاملة", price: 170 }] },
+      { id: 40, name: "هوبا تشيكن", cat: "cone", desc: "ريستو / رومي - كوردن - استربس - شيش طاووق - أصابع موتزاريلا غنية", tag: "سوبر دجاج", sizes: [{ label: "وجبة كونو كاملة", price: 180 }] },
+      { id: 41, name: "كرانشيتو", cat: "cone", desc: "شيش - استربس كرانشي - ريستو / رومي - أصابع موتزاريلا وصوصات", tag: "", sizes: [{ label: "وجبة كونو كاملة", price: 170 }] },
+      { id: 42, name: "قنبلة MIX", cat: "cone", desc: "فيلية تندوري هندي - برجر لحم 100 جرام - تشكن كرسبي مقرمش", tag: "قنبلة الميكس", sizes: [{ label: "وجبة كونو كاملة", price: 180 }] },
+      { id: 43, name: "تايجر MIX", cat: "cone", desc: "ناشفال حار - شيش تندوري - هوت دوج MIX مع صوص تايجر الناري", tag: "ناري سبايسي", sizes: [{ label: "وجبة كونو كاملة", price: 180 }] },
+      { id: 44, name: "فرانسيسكو", cat: "cone", desc: "بانية ناجتس - استربس - صوابع موتزاريلا - بسطرمة بلدي مع صوص الجبن", tag: "", sizes: [{ label: "وجبة كونو كاملة", price: 170 }] },
+      { id: 45, name: "ميجا ميكس بيف", cat: "cone", desc: "ميكس لحوم فاخرة مطهوة على الجريل مع جبنة شيدر وموتزاريلا", tag: "", sizes: [{ label: "وجبة كونو كاملة", price: 180 }] },
+      { id: 46, name: "ميكس كانو كونو", cat: "cone", desc: "كوردن بلو محشو جبن - شيش طاووق متبل - روست رومي مدخن", tag: "توقيع المحل", sizes: [{ label: "وجبة كونو كاملة", price: 170 }] },
 
-      // ==================== البرجر الفاخر (6 أصناف) ====================
-      { id: 47, name: "برجر كلاسيك", cat: "burger", desc: "صوص ميكسكانو الخاص - خس طازج - بصل مكرمل - خيار مخلل مقرمش", tag: "", sizes: [{ label: "سينجل 100جم", price: 120 }, { label: "دبل 200جم", price: 155 }] },
-      { id: 48, name: "برجر بيف تشيز", cat: "burger", desc: "صوص مسكانو - خس - بصل مكرمل - خيار مخلل - شريحة جبنة شيدر ذائبة", tag: "الأكثر طلباً", sizes: [{ label: "سينجل 100جم", price: 130 }, { label: "دبل 200جم", price: 165 }] },
-      { id: 49, name: "برجر هامر", cat: "burger", desc: "حلقات البصل المقرمشة - أصابع موتزاريلا سايحة - صوص باربيكيو مميز", tag: "قنبلة المطعم", sizes: [{ label: "سينجل 100جم", price: 140 }, { label: "دبل 200جم", price: 175 }] },
-      { id: 50, name: "برجر بيف سموكي", cat: "burger", desc: "خس مقرمش - طماطم - صوص مدخن - شرائح روستوبيف فاخرة", tag: "", sizes: [{ label: "سينجل 100جم", price: 130 }, { label: "دبل 200جم", price: 165 }] },
-      { id: 51, name: "برجر بيج تيستي", cat: "burger", desc: "خس - طماطم - خيار مخلل - صوص بيج تيستي - قطع هوت دوج متبلة", tag: "", sizes: [{ label: "سينجل 100جم", price: 130 }, { label: "دبل 200جم", price: 165 }] },
-      { id: 52, name: "برجر تشيكن تشيز", cat: "burger", desc: "فيليه دجاج كرسبي - خس مقرمش - طماطم - خيار مخلل - صوص جبن شيدر", tag: "", sizes: [{ label: "سينجل 100جم", price: 130 }, { label: "دبل 200جم", price: 165 }] },
+      // البرجر (6)
+      { id: 47, name: "برجر كلاسيك", cat: "burger", desc: "صوص ميكسكانو الخاص - خس طازج - بصل مكرمل - خيار مخلل مقرمش", tag: "", sizes: [{ label: "100 جرام", price: 120 }, { label: "150 جرام", price: 140 }, { label: "دبل", price: 160 }] },
+      { id: 48, name: "برجر بيف تشيز", cat: "burger", desc: "صوص مسكانو - خس - بصل مكرمل - خيار مخلل - شريحة جبنة شيدر ذائبة", tag: "الأكثر طلباً", sizes: [{ label: "100 جرام", price: 130 }, { label: "150 جرام", price: 150 }, { label: "دبل", price: 170 }] },
+      { id: 49, name: "برجر هامر", cat: "burger", desc: "حلقات البصل المقرمشة - أصابع موتزاريلا سايحة - صوص باربيكيو مميز", tag: "قنبلة المطعم", sizes: [{ label: "100 جرام", price: 140 }, { label: "150 جرام", price: 170 }, { label: "دبل", price: 180 }] },
+      { id: 50, name: "برجر بيف سموكي", cat: "burger", desc: "خس مقرمش - طماطم - صوص مدخن - شرائح روستوبيف فاخرة", tag: "", sizes: [{ label: "100 جرام", price: 130 }, { label: "150 جرام", price: 150 }, { label: "دبل", price: 170 }] },
+      { id: 51, name: "برجر بيج تيستي", cat: "burger", desc: "خس - طماطم - خيار مخلل - صوص بيج تيستي - قطع هوت دوج متبلة", tag: "", sizes: [{ label: "100 جرام", price: 130 }, { label: "150 جرام", price: 150 }, { label: "دبل", price: 170 }] },
+      { id: 52, name: "برجر تشيكن تشيز", cat: "burger", desc: "فيليه دجاج كرسبي - خس مقرمش - طماطم - خيار مخلل - صوص جبن شيدر", tag: "", sizes: [{ label: "100 جرام", price: 130 }, { label: "دبل", price: 180 }] },
 
-      // ==================== السندوتشات (14 صنف) ====================
-      { id: 53, name: "سندوتش بانية ناجتس", cat: "sandwich", desc: "بانية ناجتس مقرمش مع خيار مخلل وصوص مايونيز وثومية", tag: "", sizes: [{ label: "وسط", price: 50 }, { label: "كبير", price: 70 }, { label: "عيش سوري", price: 70 }] },
-      { id: 54, name: "سندوتش كرانشي ناجتس", cat: "sandwich", desc: "ناجتس كرانشي شديد القرمشة مع بطاطس وصوص خاص", tag: "", sizes: [{ label: "وسط", price: 60 }, { label: "كبير", price: 80 }, { label: "عيش سوري", price: 80 }] },
-      { id: 55, name: "سندوتش زنجر سوبريم ناجتس", cat: "sandwich", desc: "خلطة زنجر حار سبايسي لمحبي النكهات القوية المقرمشة", tag: "سبايسي", sizes: [{ label: "وسط", price: 60 }, { label: "كبير", price: 80 }, { label: "عيش سوري", price: 80 }] },
-      { id: 56, name: "سندوتش كوردن بلو", cat: "sandwich", desc: "كوردن بلو رول مع جبنة ذائبة وصوص شيدر", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 90 }, { label: "عيش سوري", price: 90 }] },
-      { id: 57, name: "سندوتش كفتة بلدي مشوية", cat: "sandwich", desc: "أصابع كفتة لحم بلدي مشوية مع بقدونس وطحينة", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 90 }, { label: "عيش سوري", price: 90 }] },
-      { id: 58, name: "سندوتش شاورما لحمة", cat: "sandwich", desc: "شاورما لحم بلدي على السيخ متبلة مع صوص طحينة", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 100 }, { label: "عيش سوري", price: 100 }] },
-      { id: 59, name: "سندوتش استربس فيلية", cat: "sandwich", desc: "استربس صدور دجاج فيليه طازجة مقرمشة", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 90 }, { label: "عيش سوري", price: 90 }] },
-      { id: 60, name: "سندوتش شيش تندوري", cat: "sandwich", desc: "شيش طاووق تندوري هندي متبل بخلطة مميزة", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 100 }, { label: "عيش سوري", price: 100 }] },
-      { id: 61, name: "سندوتش شاورما دجاج", cat: "sandwich", desc: "شاورما دجاج على الجريل مع ثومية وبطاطس وخيار مخلل", tag: "الأكثر طلباً", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 90 }, { label: "عيش سوري", price: 90 }] },
-      { id: 62, name: "سندوتش مشوي صدور تندوري", cat: "sandwich", desc: "صدور دجاج مشوية على الجريل بتتبيلة تندوري صحية", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 100 }, { label: "عيش سوري", price: 100 }] },
-      { id: 63, name: "سندوتش اكسترا كرانشي", cat: "sandwich", desc: "كمية مضاعفة من الدجاج المقرمش كرانشي", tag: "", sizes: [{ label: "كبير جامبو", price: 80 }, { label: "عيش سوري سوبر", price: 80 }] },
-      { id: 64, name: "سندوتش اكسترا زنجر", cat: "sandwich", desc: "جرعة حارة مضاعفة من قطع استربس زنجر سبايسي", tag: "", sizes: [{ label: "كبير جامبو", price: 80 }, { label: "عيش سوري سوبر", price: 80 }] },
-      { id: 65, name: "سندوتش بطاطس سادة", cat: "sandwich", desc: "أصابع بطاطس فارم فريتس مقلية مقرمشة ومتبلة", tag: "", sizes: [{ label: "وسط", price: 40 }, { label: "كبير", price: 55 }, { label: "عيش سوري", price: 55 }] },
-      { id: 66, name: "سندوتش بطاطس تشيز", cat: "sandwich", desc: "بطاطس مقلية ذهبية غارقة في صوص الجبنة الشيدر اللذيذ", tag: "", sizes: [{ label: "وسط", price: 50 }, { label: "كبير", price: 65 }, { label: "عيش سوري", price: 65 }] },
+      // السندوتشات (14)
+      { id: 53, name: "سندوتش بانية ناجتس", cat: "sandwich", desc: "بانية ناجتس ذهبي مقرمش مع خيار مخلل وصوص مايونيز وثومية", tag: "", sizes: [{ label: "وسط", price: 50 }, { label: "كبير", price: 70 }, { label: "سوري", price: 70 }] },
+      { id: 54, name: "سندوتش كرانشي ناجتس", cat: "sandwich", desc: "ناجتس كرانشي شديد القرمشة مع بطاطس وصوص خاص", tag: "", sizes: [{ label: "وسط", price: 60 }, { label: "كبير", price: 90 }, { label: "سوري", price: 90 }] },
+      { id: 55, name: "سندوتش زنجر سوبريم ناجتس", cat: "sandwich", desc: "خلطة زنجر حار سبايسي لمحبي النكهات القوية المقرمشة", tag: "سبايسي", sizes: [{ label: "وسط", price: 60 }, { label: "كبير", price: 90 }, { label: "سوري", price: 90 }] },
+      { id: 56, name: "سندوتش كوردن بلو", cat: "sandwich", desc: "كوردن بلو رول مع جبنة ذائبة وصوص شيدر", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 100 }, { label: "سوري", price: 100 }] },
+      { id: 57, name: "سندوتش كفتة بلدي مشوية", cat: "sandwich", desc: "أصابع كفتة لحم بلدي مشوية مع بقدونس وطحينة", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 100 }, { label: "سوري", price: 100 }] },
+      { id: 58, name: "سندوتش شاورما لحمة", cat: "sandwich", desc: "شاورما لحم بلدي على السيخ متبلة مع صوص طحينة", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 110 }, { label: "سوري", price: 110 }] },
+      { id: 59, name: "سندوتش استربس فيلية", cat: "sandwich", desc: "استربس صدور دجاج فيليه طازجة مقرمشة", tag: "", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 100 }, { label: "سوري", price: 100 }] },
+      { id: 60, name: "سندوتش شيش تندوري", cat: "sandwich", desc: "شيش طاووق تندوري هندي متبل بخلطة مميزة", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 110 }, { label: "سوري", price: 110 }] },
+      { id: 61, name: "سندوتش شاورما دجاج", cat: "sandwich", desc: "شاورما دجاج على الجريل مع ثومية وبطاطس وخيار مخلل", tag: "الأكثر طلباً", sizes: [{ label: "وسط", price: 70 }, { label: "كبير", price: 100 }, { label: "سوري", price: 100 }] },
+      { id: 62, name: "سندوتش مشوي صدور تندوري", cat: "sandwich", desc: "صدور دجاج مشوية على الجريل بتتبيلة تندوري صحية", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 110 }, { label: "سوري", price: 110 }] },
+      { id: 63, name: "سندوتش اكسترا كرانشي", cat: "sandwich", desc: "كمية مضاعفة من الدجاج المقرمش كرانشي", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 130 }, { label: "سوري", price: 130 }] },
+      { id: 64, name: "سندوتش اكسترا زنجر", cat: "sandwich", desc: "جرعة حارة مضاعفة من قطع استربس زنجر سبايسي", tag: "", sizes: [{ label: "وسط", price: 80 }, { label: "كبير", price: 130 }, { label: "سوري", price: 130 }] },
+      { id: 65, name: "سندوتش بطاطس سادة", cat: "sandwich", desc: "أصابع بطاطس فارم فريتس مقلية مقرمشة ومتبلة", tag: "", sizes: [{ label: "فينو", price: 40 }, { label: "سوري", price: 40 }] },
+      { id: 66, name: "سندوتش بطاطس تشيز", cat: "sandwich", desc: "بطاطس مقلية ذهبية غارقة في صوص الجبنة الشيدر اللذيذ", tag: "", sizes: [{ label: "فينو", price: 50 }, { label: "سوري", price: 50 }] },
 
-      // ==================== البطاطس والإضافات والصوصات (10 أصناف) ====================
-      { id: 67, name: "باكيت بطاطس مقلية", cat: "sides", desc: "باكيت بطاطس مقلية مقرمشة مع بهارات خاصة", tag: "", sizes: [{ label: "باكيت قياسي", price: 35 }] },
-      { id: 68, name: "بطاطس تشيز", cat: "sides", desc: "باكيت بطاطس مع صوص شيدر وموتزاريلا سايحة", tag: "جبن سايح", sizes: [{ label: "باكيت قياسي", price: 45 }] },
-      { id: 69, name: "بطاطس فريسكاس", cat: "sides", desc: "بطاطس فريسكاس متبلة بتوابل سرية مقرمشة", tag: "", sizes: [{ label: "باكيت قياسي", price: 50 }] },
-      { id: 70, name: "طبق بطاطس استربس", cat: "sides", desc: "طبق بطاطس محمل بقطع استربس الدجاج وصوص الشيدر", tag: "وجبة جانبية", sizes: [{ label: "طبق كبير", price: 120 }] },
-      { id: 71, name: "بطاطس هالبينو حار", cat: "sides", desc: "بطاطس حارة مع حلقات هلابينو وجبنة ذائبة", tag: "حار", sizes: [{ label: "طبق قياسي", price: 65 }] },
-      { id: 72, name: "علبة كول سلو طازجة", cat: "sides", desc: "سلطة كول سلو طازجة بصلصة المايونيز والعسل", tag: "", sizes: [{ label: "علبة", price: 35 }] },
-      { id: 73, name: "كوب صوص باربيكيو", cat: "sides", desc: "صوص باربيكيو مدخن أصلي", tag: "صوص", sizes: [{ label: "كوب", price: 20 }] },
-      { id: 74, name: "كوب صوص شيدر", cat: "sides", desc: "صوص جبنة شيدر كريمي دافئ", tag: "صوص", sizes: [{ label: "كوب", price: 10 }] },
-      { id: 75, name: "كوب صوص تايجر", cat: "sides", desc: "صوص تايجر حار مميز بمذاق ناري", tag: "صوص", sizes: [{ label: "كوب", price: 20 }] },
-      { id: 76, name: "كوب صوص ديناميت", cat: "sides", desc: "صوص ديناميت سبايسي كريمي فاخر", tag: "صوص", sizes: [{ label: "كوب", price: 30 }] },
+      // الإضافات (10)
+      { id: 67, name: "بطاطس", cat: "sides", desc: "باكيت بطاطس مقلية مقرمشة", tag: "", sizes: [{ label: "باكيت", price: 35 }] },
+      { id: 68, name: "بطاطس تشيز", cat: "sides", desc: "باكيت بطاطس مع صوص شيدر وموتزاريلا سايحة", tag: "جبن سايح", sizes: [{ label: "طبق", price: 45 }] },
+      { id: 69, name: "بطاطس فريسكاس", cat: "sides", desc: "بطاطس فريسكاس متبلة بتوابل سرية مقرمشة", tag: "", sizes: [{ label: "طبق", price: 50 }] },
+      { id: 70, name: "بطاطس استربس", cat: "sides", desc: "طبق بطاطس محمل بقطع استربس الدجاج وصوص الشيدر", tag: "وجبة جانبية", sizes: [{ label: "وجبة جانبية", price: 120 }] },
+      { id: 71, name: "بطاطس هالبينو", cat: "sides", desc: "بطاطس حارة مع حلقات هلابينو وجبنة ذائبة", tag: "حار", sizes: [{ label: "طبق", price: 65 }] },
+      { id: 72, name: "كول سلو", cat: "sides", desc: "سلطة كول سلو طازجة بصلصة المايونيز والعسل", tag: "", sizes: [{ label: "علبة", price: 35 }] },
+      { id: 73, name: "صوص باربيكيو", cat: "sides", desc: "صوص باربيكيو مدخن أصلي", tag: "صوص", sizes: [{ label: "كوب صوص", price: 20 }] },
+      { id: 74, name: "صوص شيدر", cat: "sides", desc: "صوص جبنة شيدر كريمي دافئ", tag: "صوص", sizes: [{ label: "كوب صوص", price: 10 }] },
+      { id: 75, name: "صوص تايجر", cat: "sides", desc: "صوص تايجر حار مميز بمذاق ناري", tag: "صوص", sizes: [{ label: "كوب صوص", price: 20 }] },
+      { id: 76, name: "صوص ديناميت", cat: "sides", desc: "صوص ديناميت سبايسي كريمي", tag: "صوص", sizes: [{ label: "كوب صوص", price: 30 }] },
 
-      // ==================== السي فود والجمبري (3 أصناف) ====================
-      { id: 77, name: "وجبة جمبري مشوي", cat: "seafood", desc: "جمبري بلدي طازج مشوي بالأعشاب والليمون والثوم مع أرز وسلطات", tag: "طازج", sizes: [{ label: "وجبة عادية", price: 220 }, { label: "وجبة دبل جمبري", price: 290 }] },
-      { id: 78, name: "وجبة جمبري كرسبي", cat: "seafood", desc: "جمبري مقلي ذهبي مقرمش مع صوص تارتار وليمون وبطاطس", tag: "", sizes: [{ label: "وجبة عادية", price: 220 }, { label: "وجبة دبل جمبري", price: 290 }] },
-      { id: 79, name: "وجبة ميكس سي فود", cat: "seafood", desc: "طبق مشكل فاخر (جمبري + سبيط + فيليه سمك) مشوي أو مقلي", tag: "سبيشال", sizes: [{ label: "وجبة عادية", price: 240 }, { label: "وجبة دبل بحري", price: 320 }] }
+      // السي فود (3)
+      { id: 77, name: "جمبري مشوي", cat: "seafood", desc: "جمبري بلدي طازج مشوي بالأعشاب والليمون والثوم", tag: "طازج يومياً", sizes: [{ label: "وجبة (سعر اليوم)", price: 220 }] },
+      { id: 78, name: "جمبري كرسبي", cat: "seafood", desc: "جمبري مقلي ذهبي مقرمش مع صوص تارتار وليمون", tag: "", sizes: [{ label: "وجبة (سعر اليوم)", price: 220 }] },
+      { id: 79, name: "ميكس سي فود", cat: "seafood", desc: "طبق مشكل فاخر (جمبري + سبيط + فيليه سمك) مشوي أو مقلي", tag: "سبيشال", sizes: [{ label: "وجبة (سعر اليوم)", price: 240 }] }
     ];
 
-    // User Profile in localStorage
+    // User Profile
     const STORAGE_KEY = "mixcano_customer_profile";
     let customerProfile = null;
 
     function loadCustomerProfile() {
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          customerProfile = JSON.parse(saved);
-        }
+        if (saved) customerProfile = JSON.parse(saved);
       } catch (e) {
         customerProfile = null;
       }
@@ -1057,27 +1131,100 @@
       syncCheckoutInputs();
     }
 
-    // Size cache per product card
+    // Size cache
     const selectedSizeMap = {};
     let cart = [];
     let currentCategory = 'all';
 
-    // Currently customizing item
+    // Customization in modal
     let customizingItem = null;
     let modalSelectedSizeIdx = 0;
-    let modalSelectedCrustIdx = 0;
-    let modalSelectedAddons = new Set();
+    let modalHasStuffedCrust = false;
+    let modalHasExtraCheese = false;
+    let modalSelectedSauces = new Set();
 
     const categoryNames = {
       'all': 'كل قائمة الطعام',
       'pizza': 'البيتزا الإيطالي',
       'crepe': 'الكريبات الحادقة',
-      'cone': 'كونو ميكسكانو المميز',
+      'cone': 'ركن كريب كونو المميز',
       'burger': 'البرجر الفاخر',
       'sandwich': 'السندوتشات السريعة',
       'sides': 'البطاطس والإضافات والصوصات',
       'seafood': 'السي فود والجمبري'
     };
+
+    // Arabic String Normalization & Levenshtein / Fuzzy Match
+    function normalizeArabic(text) {
+      if (!text) return "";
+      return text.trim().toLowerCase()
+        .replace(/[أإآ]/g, 'ا')
+        .replace(/ة/g, 'ه')
+        .replace(/ى/g, 'ي')
+        .replace(/[ًٌٍَُِّْ]/g, '') // Remove harakat
+        .replace(/\s+/g, ' ');
+    }
+
+    // Common spelling mistakes / transpositions dictionary
+    const typoEquivalents = {
+      "كيرب": "كريب",
+      "كرب": "كريب",
+      "كرييب": "كريب",
+      "كريبه": "كريب",
+      "بتزا": "بيتزا",
+      "بيتذا": "بيتزا",
+      "بيذتها": "بيتزا",
+      "بورجر": "برجر",
+      "برغر": "برجر",
+      "بورقر": "برجر",
+      "كنو": "كونو",
+      "سندوتش": "سندوتش",
+      "ساندوتش": "سندوتش",
+      "ساندوتشات": "سندوتش",
+      "شنوتش": "سندوتش",
+      "جمبرى": "جمبري",
+      "قمبري": "جمبري",
+      "رانش": "رانش",
+      "رنش": "رانش",
+      "زنقر": "زنجر",
+      "زنجار": "زنجر",
+      "بانيه": "بانية",
+      "بانيا": "بانية"
+    };
+
+    function fuzzyMatch(query, target) {
+      const qNorm = normalizeArabic(query);
+      const tNorm = normalizeArabic(target);
+
+      // Direct substring match
+      if (tNorm.includes(qNorm)) return true;
+
+      // Check typo dictionary
+      for (const [typo, correct] of Object.entries(typoEquivalents)) {
+        if (qNorm.includes(normalizeArabic(typo)) && tNorm.includes(normalizeArabic(correct))) {
+          return true;
+        }
+      }
+
+      // Token match
+      const qWords = qNorm.split(' ');
+      for (const w of qWords) {
+        if (w.length >= 3) {
+          // Check transposed characters (e.g., كيرب -> كريب)
+          const sortedW = w.split('').sort().join('');
+          const tWords = tNorm.split(' ');
+          for (const tw of tWords) {
+            if (tw.length >= 3) {
+              const sortedTw = tw.split('').sort().join('');
+              if (sortedW === sortedTw) return true;
+              if (tw.includes(w) || w.includes(tw)) return true;
+            }
+          }
+        }
+      }
+
+      return false;
+    }
 
     // Render Products Grid
     function renderProducts(items) {
@@ -1092,7 +1239,7 @@
         return;
       }
 
-      container.innerHTML = items.map(p => {
+      container.innerHTML = items.map((p, index) => {
         const currentSizeIdx = selectedSizeMap[p.id] !== undefined ? selectedSizeMap[p.id] : 0;
         const currentPrice = p.sizes[currentSizeIdx].price;
 
@@ -1106,10 +1253,11 @@
           </div>
         ` : '';
 
-        const hasCustomization = p.cat === 'pizza' || p.sizes.length > 1 || p.cat === 'crepe' || p.cat === 'cone' || p.cat === 'burger';
+        const hasCustomization = p.cat === 'pizza' || p.sizes.length > 1;
+        const delay = Math.min(index * 0.04, 0.4);
 
         return `
-          <div class="product-card" id="card-${p.id}">
+          <div class="product-card" id="card-${p.id}" style="animation-delay: ${delay}s;">
             <div>
               <div class="card-top">
                 <h3 class="product-title">${p.name}</h3>
@@ -1159,16 +1307,18 @@
       const sizeIdx = selectedSizeMap[productId] !== undefined ? selectedSizeMap[productId] : 0;
       const sizeObj = item.sizes[sizeIdx];
 
-      addToCartDetailed(item, sizeObj.label, sizeObj.price, null, []);
+      addToCartDetailed(item, sizeObj.label, sizeObj.price, false, false, []);
     }
 
+    // Open Customization Modal
     function openCustomizeModal(productId) {
       customizingItem = menuItems.find(p => p.id === productId);
       if (!customizingItem) return;
 
       modalSelectedSizeIdx = selectedSizeMap[productId] !== undefined ? selectedSizeMap[productId] : 0;
-      modalSelectedCrustIdx = 0;
-      modalSelectedAddons.clear();
+      modalHasStuffedCrust = false;
+      modalHasExtraCheese = false;
+      modalSelectedSauces.clear();
 
       document.getElementById("customItemName").innerText = customizingItem.name;
       document.getElementById("customItemDesc").innerText = customizingItem.desc;
@@ -1184,36 +1334,36 @@
         </label>
       `).join("");
 
-      const crustSection = document.getElementById("crustSection");
+      const pizzaCrustSection = document.getElementById("pizzaCrustSection");
       if (customizingItem.cat === 'pizza') {
-        crustSection.style.display = "block";
-        const crustList = document.getElementById("crustOptionsList");
-        crustList.innerHTML = pizzaCrustOptions.map((c, idx) => `
-          <label class="option-row ${idx === modalSelectedCrustIdx ? 'selected' : ''}" onclick="onModalCrustChange(${idx})">
-            <div>
-              <input type="radio" name="modalCrust" ${idx === modalSelectedCrustIdx ? 'checked' : ''}>
-              <span>${c.name}</span>
-            </div>
-            <span style="font-weight:900;">${c.price > 0 ? `+${c.price} ج.م` : 'مجاناً'}</span>
-          </label>
-        `).join("");
+        pizzaCrustSection.style.display = "block";
+        selectPizzaCrust(false);
+        document.getElementById("pizzaExtraCheeseCheck").checked = false;
+        document.getElementById("pizzaExtraCheeseRow").classList.remove("selected");
+        updatePizzaCrustLabel();
       } else {
-        crustSection.style.display = "none";
+        pizzaCrustSection.style.display = "none";
       }
 
-      const addonsList = document.getElementById("addonOptionsList");
-      addonsList.innerHTML = generalAddons.map((a, idx) => `
-        <label class="option-row" id="addon-row-${idx}" onclick="toggleModalAddon(${idx}, this)">
+      const saucesList = document.getElementById("officialSaucesList");
+      saucesList.innerHTML = authenticSauces.map((s, idx) => `
+        <label class="option-row" id="sauce-row-${idx}" onclick="toggleModalSauce(${idx}, this)">
           <div>
-            <input type="checkbox" id="addon-check-${idx}">
-            <span>${a.name}</span>
+            <input type="checkbox" id="sauce-check-${idx}">
+            <span>${s.name}</span>
           </div>
-          <span style="font-weight:900;">+${a.price} ج.م</span>
+          <span style="font-weight:900;">+${s.price} ج.م</span>
         </label>
       `).join("");
 
       updateModalPrice();
       document.getElementById("customizeModal").style.display = "flex";
+    }
+
+    function updatePizzaCrustLabel() {
+      const isLarge = customizingItem.sizes[modalSelectedSizeIdx].label.includes("كبير");
+      const cost = isLarge ? 60 : 40;
+      document.getElementById("crustPriceLabel").innerText = `+${cost} ج.م`;
     }
 
     function onModalSizeChange(idx) {
@@ -1227,31 +1377,47 @@
           r.classList.remove("selected");
         }
       });
+      if (customizingItem.cat === 'pizza') {
+        updatePizzaCrustLabel();
+      }
       updateModalPrice();
     }
 
-    function onModalCrustChange(idx) {
-      modalSelectedCrustIdx = idx;
-      const rows = document.querySelectorAll("#crustOptionsList .option-row");
-      rows.forEach((r, i) => {
-        if (i === idx) {
-          r.classList.add("selected");
-          r.querySelector("input").checked = true;
-        } else {
-          r.classList.remove("selected");
-        }
-      });
+    function selectPizzaCrust(hasStuffed) {
+      modalHasStuffedCrust = hasStuffed;
+      const noneRow = document.getElementById("crust-none-row");
+      const stuffedRow = document.getElementById("crust-stuffed-row");
+
+      if (hasStuffed) {
+        stuffedRow.classList.add("selected");
+        document.getElementById("crust-stuffed-check").checked = true;
+        noneRow.classList.remove("selected");
+      } else {
+        noneRow.classList.add("selected");
+        document.getElementById("crust-none-check").checked = true;
+        stuffedRow.classList.remove("selected");
+      }
       updateModalPrice();
     }
 
-    function toggleModalAddon(idx, element) {
-      const checkbox = document.getElementById(`addon-check-${idx}`);
-      if (modalSelectedAddons.has(idx)) {
-        modalSelectedAddons.delete(idx);
+    function togglePizzaExtraCheese() {
+      modalHasExtraCheese = !modalHasExtraCheese;
+      const check = document.getElementById("pizzaExtraCheeseCheck");
+      const row = document.getElementById("pizzaExtraCheeseRow");
+      check.checked = modalHasExtraCheese;
+      if (modalHasExtraCheese) row.classList.add("selected");
+      else row.classList.remove("selected");
+      updateModalPrice();
+    }
+
+    function toggleModalSauce(idx, element) {
+      const checkbox = document.getElementById(`sauce-check-${idx}`);
+      if (modalSelectedSauces.has(idx)) {
+        modalSelectedSauces.delete(idx);
         checkbox.checked = false;
         element.classList.remove("selected");
       } else {
-        modalSelectedAddons.add(idx);
+        modalSelectedSauces.add(idx);
         checkbox.checked = true;
         element.classList.add("selected");
       }
@@ -1261,12 +1427,19 @@
     function updateModalPrice() {
       if (!customizingItem) return;
       let total = customizingItem.sizes[modalSelectedSizeIdx].price;
+
       if (customizingItem.cat === 'pizza') {
-        total += pizzaCrustOptions[modalSelectedCrustIdx].price;
+        if (modalHasStuffedCrust) {
+          const isLarge = customizingItem.sizes[modalSelectedSizeIdx].label.includes("كبير");
+          total += isLarge ? 60 : 40;
+        }
+        if (modalHasExtraCheese) total += 25;
       }
-      modalSelectedAddons.forEach(idx => {
-        total += generalAddons[idx].price;
+
+      modalSelectedSauces.forEach(idx => {
+        total += authenticSauces[idx].price;
       });
+
       document.getElementById("customItemPrice").innerText = `${total} ج.م`;
     }
 
@@ -1278,20 +1451,29 @@
     function confirmAddToCartFromModal() {
       if (!customizingItem) return;
       const sizeObj = customizingItem.sizes[modalSelectedSizeIdx];
-      const crustObj = customizingItem.cat === 'pizza' && modalSelectedCrustIdx > 0 ? pizzaCrustOptions[modalSelectedCrustIdx] : null;
+      let crustCost = 0;
 
-      const chosenAddons = [];
-      modalSelectedAddons.forEach(idx => chosenAddons.push(generalAddons[idx]));
+      if (customizingItem.cat === 'pizza' && modalHasStuffedCrust) {
+        crustCost = sizeObj.label.includes("كبير") ? 60 : 40;
+      }
+      const extraCheeseCost = (customizingItem.cat === 'pizza' && modalHasExtraCheese) ? 25 : 0;
 
-      let unitPrice = sizeObj.price + (crustObj ? crustObj.price : 0);
-      chosenAddons.forEach(a => unitPrice += a.price);
+      const chosenSauces = [];
+      let saucesCost = 0;
+      modalSelectedSauces.forEach(idx => {
+        chosenSauces.push(authenticSauces[idx].name);
+        saucesCost += authenticSauces[idx].price;
+      });
 
-      addToCartDetailed(customizingItem, sizeObj.label, unitPrice, crustObj ? crustObj.name : null, chosenAddons.map(a => a.name));
+      const unitPrice = sizeObj.price + crustCost + extraCheeseCost + saucesCost;
+
+      addToCartDetailed(customizingItem, sizeObj.label, unitPrice, modalHasStuffedCrust, modalHasExtraCheese, chosenSauces);
       closeCustomizeModal();
     }
 
-    function addToCartDetailed(item, sizeLabel, unitPrice, crustName, addonsList) {
-      const configKey = `${item.id}|${sizeLabel}|${crustName || ''}|${addonsList.join(',')}`;
+    // Detailed Cart Item
+    function addToCartDetailed(item, sizeLabel, unitPrice, hasStuffedCrust, hasExtraCheese, saucesList) {
+      const configKey = `${item.id}|${sizeLabel}|${hasStuffedCrust}|${hasExtraCheese}|${saucesList.join(',')}`;
       const existing = cart.find(c => c.configKey === configKey);
 
       if (existing) {
@@ -1303,8 +1485,9 @@
           name: item.name,
           sizeLabel,
           unitPrice,
-          crustName,
-          addonsList,
+          hasStuffedCrust,
+          hasExtraCheese,
+          saucesList,
           qty: 1
         });
       }
@@ -1351,8 +1534,9 @@
           <div>
             <div style="font-weight:800; font-size:14px;">${item.name} (${item.sizeLabel})</div>
             <div class="cart-item-details">
-              ${item.crustName ? `• أطراف: ${item.crustName}<br>` : ''}
-              ${item.addonsList.length > 0 ? `• إضافات: ${item.addonsList.join(' + ')}<br>` : ''}
+              ${item.hasStuffedCrust ? `• حشو أطراف جبنة موتزاريلا<br>` : ''}
+              ${item.hasExtraCheese ? `• إكسترا جبنة موتزاريلا (+25 ج)<br>` : ''}
+              ${item.saucesList.length > 0 ? `• صوص: ${item.saucesList.join(' + ')}<br>` : ''}
             </div>
             <div style="font-size:12px; color:var(--primary); font-weight:bold; margin-top:2px;">
               ${item.unitPrice * item.qty} ج.م (${item.unitPrice} ج × ${item.qty})
@@ -1413,10 +1597,14 @@
       document.getElementById("cartModal").style.display = "none";
     }
 
+    // Category click with smooth scroll to center & re-triggering entrance
     function filterCategory(cat, btn) {
       currentCategory = cat;
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      if (btn) btn.classList.add("active");
+      if (btn) {
+        btn.classList.add("active");
+        btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      }
       document.getElementById("searchInput").value = "";
 
       const filtered = cat === 'all' ? menuItems : menuItems.filter(p => p.cat === cat);
@@ -1425,23 +1613,27 @@
       renderProducts(filtered);
     }
 
+    // Smart Typo-tolerant Search
     function handleSearch() {
-      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      const query = document.getElementById("searchInput").value.trim();
       if (!query) {
         filterCategory(currentCategory, null);
         return;
       }
+
       const results = menuItems.filter(p => 
-        p.name.toLowerCase().includes(query) || 
-        p.desc.toLowerCase().includes(query) ||
-        (p.tag && p.tag.toLowerCase().includes(query))
+        fuzzyMatch(query, p.name) || 
+        fuzzyMatch(query, p.desc) ||
+        (p.tag && fuzzyMatch(query, p.tag)) ||
+        fuzzyMatch(query, categoryNames[p.cat] || '')
       );
+
       document.getElementById("currentCategoryTitle").innerText = `نتائج البحث عن "${query}"`;
-      document.getElementById("currentCategoryCount").innerText = `${results.length} صنف`;
+      document.getElementById("currentCategoryCount").innerText = `${results.length} صنف متاح`;
       renderProducts(results);
     }
 
-    // Send Order to Telegram
+    // Send Order to Telegram Bot
     async function handleSendOrder(e) {
       e.preventDefault();
       if (cart.length === 0) return;
@@ -1463,7 +1655,6 @@
         return;
       }
 
-      // Auto-save user profile for all future orders!
       saveCustomerProfile(name, phone, address);
 
       const submitBtn = document.getElementById("submitBtn");
@@ -1475,8 +1666,9 @@
 
       const itemsText = cart.map(i => {
         let details = `• <b>${i.name}</b> (${i.sizeLabel}) [×${i.qty}] = ${i.unitPrice * i.qty} ج.م`;
-        if (i.crustName) details += `\n   └ 🧀 أطراف: ${i.crustName}`;
-        if (i.addonsList.length > 0) details += `\n   └ 🥫 إضافات: ${i.addonsList.join(' + ')}`;
+        if (i.hasStuffedCrust) details += `\n   └ 🧀 حشو أطراف موتزاريلا`;
+        if (i.hasExtraCheese) details += `\n   └ 🧀 إكسترا جبنة موتزاريلا (+25 ج)`;
+        if (i.saucesList && i.saucesList.length > 0) details += `\n   └ 🥫 صوص: ${i.saucesList.join(' + ')}`;
         return details;
       }).join("\n");
 
@@ -1493,7 +1685,7 @@ ${itemsText}
 
 💰 <b>الإجمالي المطلوب:</b> <b>${total} ج.م</b>
 💳 <b>طريقة الدفع:</b> الاتصال لتحديد كاش أو فودافون كاش
-${notes ? `📝 <b>ملاحظات العميل:</b> ${notes}\n` : ""}━━━━━━━━━━━━━━━━━━━━
+${notes ? `📝 <b>ملاحظات إضافية من العميل:</b> ${notes}\n` : ""}━━━━━━━━━━━━━━━━━━━━
 👨‍🍳 <i>يرجى سرعة الاتصال بالزبون وتجهيز الأوردر فوراً!</i>`;
 
       try {
@@ -1520,7 +1712,7 @@ ${notes ? `📝 <b>ملاحظات العميل:</b> ${notes}\n` : ""}━━━�
         alert("يرجى التأكد من اتصال الإنترنت أو الاتصال بنا مباشرة على 01002066323");
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = "<span>إرسال الطلب لمطبخ ميكسكانو 🚀</span>";
+        submitBtn.innerHTML = "<span>إرسال الطلب لمطبخ ميكسكانو الآن 🚀</span>";
       }
     }
 
@@ -1529,4 +1721,4 @@ ${notes ? `📝 <b>ملاحظات العميل:</b> ${notes}\n` : ""}━━━�
     renderProducts(menuItems);
   </script>
 </body>
-        </html>
+  </html>
